@@ -2,7 +2,7 @@
   <div class="flex items-stretch relative">
     <div class="container shrink-0 relative z-0 pt-8">
       <div class="relative">
-        <SectionTitle :link-title="'Barcha tashkilotlar'" />
+        <SectionTitle :link-title="'Barcha tashkilotlar'" :link="'/blog'" />
         <div class="overflow-hidden px-[300px] -mx-[300px] md:py-5 md:-my-5 relative z-0">
           <Swiper
             class="w-full !overflow-visible"

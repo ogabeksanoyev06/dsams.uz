@@ -11,7 +11,7 @@
             <NuxtLink to="/sectors" class="text-sm font-medium text-gray-5">Sektorlar</NuxtLink>
             <NuxtLink to="/" class="text-sm font-medium text-gray-5">Tashkilotlar</NuxtLink>
             <NuxtLink to="/" class="text-sm font-medium text-gray-5">Biz haqimizda</NuxtLink>
-            <NuxtLink to="/" class="text-sm font-medium text-gray-5">Blog</NuxtLink>
+            <NuxtLink to="/blog" class="text-sm font-medium text-gray-5">Blog</NuxtLink>
           </nav>
         </div>
         <div class="flex flex-1 items-center justify-between space-x-4 lg:space-x-6 xl:space-x-8 md:justify-end">
