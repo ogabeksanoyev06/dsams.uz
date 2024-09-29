@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 border border-transparent transition-300 focus-within:border-blue flex items-center rounded-lg" :class="{ '!border-danger': error }">
+  <div class="bg-white border border-transparent transition-300 focus-within:border-blue flex items-center rounded-lg" :class="[wrapperClass, { '!border-danger': error }]">
     <!-- Prefix Slot -->
     <slot name="prefix">
       <span :class="prefixClass" v-if="prefixClass">Prefix</span>
@@ -19,7 +19,7 @@
         id,
       }"
       ref="Input"
-      class="w-full text-base sm:text-sm leading-5 text-dark font-medium bg-transparent outline-none placeholder:text-gray-200 disabled:text-gray"
+      class="w-full h-full text-sm p-3 text-dark bg-transparent placeholder:text-gray-5 placeholder:text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
       :value="modelValue"
       :class="[inputClass]"
       @keyup.enter="handleEnter"
@@ -48,6 +48,7 @@ const props = defineProps({
   max: Number,
   min: Number,
   inputClass: [String, Array],
+  wrapperClass: { type: [String, Array], default: '' },
   prefixClass: String, // Prefix uchun sinf
   suffixClass: String, // Suffix uchun sinf
   autocomplete: { type: String, default: 'new-password' },

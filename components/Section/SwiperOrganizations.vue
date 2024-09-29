@@ -3,7 +3,7 @@
     <!-- <div class="bg-gradient-to-r from-gray-1 to-transparent w-full z-10 flex-center mt-[82px]"></div> -->
     <div class="container shrink-0 relative z-0 pt-8">
       <div class="relative">
-        <SectionTitle :title="'Tashkilotlar'" :link-title="'Barcha tashkilotlar'" />
+        <SectionTitle :title="'Tashkilotlar'" :link-title="'Barcha tashkilotlar'" :link="'/organizations'" />
         <div class="overflow-hidden px-[300px] -mx-[300px] md:py-5 md:-my-5 relative z-0">
           <Swiper
             class="w-full !overflow-visible"

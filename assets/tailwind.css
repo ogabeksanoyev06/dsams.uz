@@ -8,14 +8,14 @@
 
 @layer base {
   body {
-    @apply text-dark bg-gray-1 text-sm leading-4;
+    @apply text-dark bg-gray-1 text-sm !leading-4;
     font-family: "Roboto", sans-serif;
   }
 }
 
 @layer components {
   .container {
-    @apply !max-w-[960px];
+    @apply !max-w-[1128px];
   }
 }
 
@@ -96,6 +96,7 @@
     background-position: 468px 0;
   }
 }
+
 
 ::selection {
   background: #0598d0;

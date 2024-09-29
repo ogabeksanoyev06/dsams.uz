@@ -1,5 +1,6 @@
 <template>
   <div>
+    <UIBreadcrumb />
     <div class="container py-8">
       <div class="flex max-lg:flex-col gap-4 lg:items-end justify-between mb-6 sm:mb-10">
         <div class="flex flex-col items-start space-y-1 max-w-[580px]">
@@ -16,7 +17,7 @@
 
             <template #suffix>
               <div class="px-3 h-max flex-center cursor-pointer transition-300 group !opacity-100 !scale-100 !">
-                <span class="icon-search"></span>
+                <span class="icon-search text-yellow"></span>
               </div>
             </template>
           </FormInput>

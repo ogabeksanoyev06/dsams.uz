@@ -1,6 +1,6 @@
 <template>
   <div class="sticky top-0 z-[90]">
-    <header class="relative z-[100] w-full pt-4 pb-3 transition-300 bg-white border-b-[0.5px] border-transparent">
+    <header class="relative z-[100] w-full pt-4 pb-3 transition-300 bg-white border-b-[0.5px] border-gray-100">
       <div class="container !max-w-[1440px] flex-center-between gap-5 h-16">
         <div class="flex items-center md:gap-10 lg:gap-14 xl:gap-20">
           <NuxtLink to="/" class="flex items-center justify-center flex-shrink-0 p-[5.249px_6.358px_6.698px_6.698px] h-12 w-[140px]">
@@ -9,7 +9,7 @@
           <nav class="flex items-center max-lg:space-x-4 space-x-6 text-sm font-medium">
             <NuxtLink to="/" class="text-sm font-medium text-dark">Standartlar</NuxtLink>
             <NuxtLink to="/sectors" class="text-sm font-medium text-gray-5">Sektorlar</NuxtLink>
-            <NuxtLink to="/" class="text-sm font-medium text-gray-5">Tashkilotlar</NuxtLink>
+            <NuxtLink to="/organizations" class="text-sm font-medium text-gray-5">Tashkilotlar</NuxtLink>
             <NuxtLink to="/" class="text-sm font-medium text-gray-5">Biz haqimizda</NuxtLink>
             <NuxtLink to="/blog" class="text-sm font-medium text-gray-5">Blog</NuxtLink>
           </nav>
