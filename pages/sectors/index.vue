@@ -2,12 +2,12 @@
   <div>
     <UIBreadcrumb :breadcrumb />
     <div class="py-8 container">
-      <div class="flex max-md:flex-col max-md:gap-3 md:items-end justify-between gap-4 mb-6 sm:mb-9">
-        <div class="flex flex-col items-start space-y-1 max-w-[580px]">
-          <h1 class="font-semibold text-xl sm:text-3xl leading-130 text-dark">Sektorlar</h1>
-          <p class="text-sm sm:text-base text-gray-700 font-normal leading-130">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil assumenda necessitatibus voluptas quod officia repellendus vero? Delectus iste quibusdam non.</p>
+      <div class="grid grid-cols-12 lg:items-end gap-5 mb-5">
+        <div class="flex flex-col items-start gap-3 col-span-12 lg:col-span-7">
+          <h1 class="font-bold text-xl sm:text-2xl">Sektorlar</h1>
+          <p class="text-sm sm:text-base text-gray-5 leading-6">Bizning eng yaxshi xitlarimiz: eng mashhur ISO standartlari, shu jumladan boshqaruv tizimi standartlarimiz</p>
         </div>
-        <FormInput v-model="search" placeholder="Qidirish uchun kiriting..." inputClass="!pl-0" wrapperClass="sm:!max-w-[350px] w-full">
+        <FormInput v-model="search" placeholder="Qidirish uchun kiriting..." inputClass="!pl-0" wrapperClass="col-span-12 lg:col-span-5">
           <template #prefix>
             <div class="h-max pl-3 pr-3 pointer-events-none flex-center">
               <span class="icon-search flex-center text-lg h-[18px]"></span>

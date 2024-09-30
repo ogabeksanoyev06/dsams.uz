@@ -34,10 +34,11 @@ export default {
         'card-2': '0px 8px 40px 2px rgba(1, 20, 50, 0.08)',
         blog: '0px 12px 48px -12px rgba(1, 20, 50, 0.30)',
         'organizations-image': '0px 6px 32px 0px rgba(188, 199, 225, 0.88)',
-        'rectangle':'0px 5px 6px 0px rgba(0, 0, 0, 0.03)',
+        rectangle: '0px 5px 6px 0px rgba(0, 0, 0, 0.03)',
         'yellow-1': '0px 6px 20px 2px rgba(255, 204, 0, 0.16)',
         'yellow-2': '0px 4px 16px 0px rgba(255, 204, 0, 0.40)',
         'swiper-btn': '0px 0px 12px 0px rgba(0, 12, 30, 0.16)',
+        'header': '0px 6px 20px 0px rgba(1, 20, 50, 0.08)',
       },
       lineHeight: {
         130: '130%',

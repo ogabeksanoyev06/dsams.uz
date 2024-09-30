@@ -6,7 +6,7 @@
         <SectionTitle :title="'Tashkilotlar'" :link-title="'Barcha tashkilotlar'" :link="'/organizations'" />
         <div class="overflow-hidden px-[300px] -mx-[300px] md:py-5 md:-my-5 relative z-0">
           <Swiper
-            class="w-full !overflow-visible"
+            class="w-full !overflow-visible !py-5"
             @swiper="onSwiper"
             @slideChange="onSlideChange"
             :modules="[SwiperAutoplay]"

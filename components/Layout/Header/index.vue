@@ -1,17 +1,17 @@
 <template>
   <div class="sticky top-0 z-[90]">
-    <header class="relative z-[100] w-full pt-4 pb-3 transition-300 bg-white border-b-[0.5px] border-gray-100">
+    <header class="relative z-[100] w-full pt-4 pb-3 transition-300 bg-white backdrop-blur-[20px] border-b-[0.5px] border-gray-100" :class="{ 'shadow-header bg-white/[0.88] !border-b-0 !pt-3': dark }">
       <div class="container !max-w-[1440px] flex-center-between gap-5 h-16">
         <div class="flex items-center md:gap-10 lg:gap-14 xl:gap-20">
           <NuxtLink to="/" class="flex items-center justify-center flex-shrink-0 p-[5.249px_6.358px_6.698px_6.698px] h-12 w-[140px]">
             <img src="/assets/svg/logo.svg" alt="" class="w-full h-full object-contain" />
           </NuxtLink>
-          <nav class="flex items-center max-lg:space-x-4 space-x-6 text-sm font-medium">
-            <NuxtLink to="/" class="text-sm font-medium text-dark">Standartlar</NuxtLink>
-            <NuxtLink to="/sectors" class="text-sm font-medium text-gray-5">Sektorlar</NuxtLink>
-            <NuxtLink to="/organizations" class="text-sm font-medium text-gray-5">Tashkilotlar</NuxtLink>
-            <NuxtLink to="/" class="text-sm font-medium text-gray-5">Biz haqimizda</NuxtLink>
-            <NuxtLink to="/blog" class="text-sm font-medium text-gray-5">Blog</NuxtLink>
+
+          <nav class="flex items-center max-lg:space-x-4 space-x-4 text-sm font-medium relative z-10">
+            <div class="absolute h-full rounded-lg bg-yellow -translate-y-1/2 top-1/2 transition-all duration-300 z-[-1]" :style="{ width: `${active.width}px`, left: `${active.left}px` }"></div>
+            <NuxtLink v-for="(link, i) in links" :key="link.name" :to="link.to" :id="`link-${link.name}`" class="text-sm font-medium py-1 px-2 rounded-lg" :class="route.name === link.name ? ' text-dark' : ' text-gray-5'">
+              {{ link.text }}
+            </NuxtLink>
           </nav>
         </div>
         <div class="flex flex-1 items-center justify-between space-x-4 lg:space-x-6 xl:space-x-8 md:justify-end">
@@ -62,4 +62,41 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+  dark: {
+    type: Boolean,
+  },
+})
+
+const route = useRoute()
+
+const links = [
+  { to: '/standards', text: 'Standartlar', name: 'standards' },
+  { to: '/sectors', text: 'Sektorlar', name: 'sectors' },
+  { to: '/organizations', text: 'Tashkilotlar', name: 'organizations' },
+  { to: '/about', text: 'Biz haqimizda', name: 'about' },
+  { to: '/blog', text: 'Blog', name: 'blog' },
+]
+
+const active = ref({ left: 0, width: 0 })
+
+const updateActiveLink = () => {
+  const activeLink = links.find((link) => link.name === route.name)
+  if (activeLink) {
+    const item = document.getElementById(`link-${activeLink.name}`) // to'g'ri ID bilan olish
+    if (item) {
+      active.value.left = item.offsetLeft // linkning chapdan joylashuvini olish
+      active.value.width = item.offsetWidth // linkning kengligini olish
+    } else {
+      console.error(`Element with ID link-${activeLink.name} not found.`)
+    }
+  }
+}
+
+onMounted(() => {
+  updateActiveLink()
+})
+
+watch(() => route.name, updateActiveLink)
+</script>

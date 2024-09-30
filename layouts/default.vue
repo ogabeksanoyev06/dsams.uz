@@ -1,15 +1,15 @@
 <script setup>
-// import { useWindowScroll } from '@vueuse/core'
+import { useWindowScroll } from '@vueuse/core'
 
-// const { y } = useWindowScroll()
+const { y } = useWindowScroll()
 
-// const route = useRoute()
-// const dark = computed(() => y.value < 100 && route.name === 'index')
+const route = useRoute()
+const dark = computed(() => y.value > 30)
 </script>
 
 <template>
   <div class="flex min-h-screen flex-col">
-    <LayoutHeader />
+    <LayoutHeader :dark />
     <div class="flex-1 relative overflow-hidden">
       <slot />
     </div>
