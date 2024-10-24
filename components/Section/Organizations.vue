@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-stretch relative">
+  <div class="flex items-stretch relative overflow-hidden">
     <!-- <div class="bg-gradient-to-r from-gray-1 to-transparent w-full z-10 flex-center mt-[82px]"></div> -->
     <div class="container shrink-0 relative z-0 pt-8">
       <div class="relative">
@@ -30,7 +30,7 @@
             }"
           >
             <SwiperSlide v-for="(review, i) in 10" :key="i">
-              <NuxtLink to="/" class="">
+              <NuxtLink :to="localePath('/')" class="">
                 <div class="rounded-2xl bg-white border border-gray-1 transition-300 shadow-card-2 hover:shadow-card group/card md:hover:-translate-y-1.5 max-h-[400px] p-3 pt-9">
                   <div class="w-[80px] h-[80px] rounded-full overflow-hidden border-2 border-gray-6 mx-auto shadow-organizations-image mb-5">
                     <img alt="Image" class="w-full h-full rounded-full object-cover bg-white" src="https://cdn.commeta.uz//https://cdn.commeta.uz/media/uploaded/2024/03/29/commeta_slh5e8x.png" />
@@ -95,6 +95,8 @@
 </template>
 
 <script setup>
+const localePath = useLocalePath()
+
 const swiperOrganizations = ref(null)
 const isBeginning = ref(true)
 const isEnd = ref(false)

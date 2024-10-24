@@ -1,10 +1,8 @@
 <template>
-  <div class="bg-white border border-transparent transition-300 focus-within:border-blue flex items-center rounded-lg" :class="[wrapperClass, { '!border-danger': error }]">
-    <!-- Prefix Slot -->
-    <slot name="prefix">
-      <span :class="prefixClass" v-if="prefixClass">Prefix</span>
-    </slot>
-    <!-- Input -->
+  <div class="bg-gray-1 border border-transparent transition-300 focus-within:!bg-white overflow-hidden focus-within:border-blue flex items-center rounded-lg" :class="[wrapperClass, { '!border-danger': error }]">
+    <div class="pl-3 h-max flex-center cursor-pointer transition-300" v-if="prefix">
+      <slot name="prefix"> </slot>
+    </div>
     <input
       v-bind="{
         type,
@@ -19,7 +17,7 @@
         id,
       }"
       ref="Input"
-      class="w-full h-full text-sm p-3 text-dark bg-transparent placeholder:text-gray-5 placeholder:text-sm outline-none disabled:cursor-not-allowed disabled:opacity-50"
+      class="w-full h-full sm:text-base text-sm p-3 text-dark bg-transparent placeholder:text-dark placeholder:sm:text-base outline-none disabled:cursor-not-allowed"
       :value="modelValue"
       :class="[inputClass]"
       @keyup.enter="handleEnter"
@@ -28,10 +26,9 @@
       @focusout="$emit('focusout')"
       @focus="handleFocus"
     />
-    <!-- Suffix Slot -->
-    <slot name="suffix">
-      <span :class="suffixClass" v-if="suffixClass">Suffix</span>
-    </slot>
+    <div class="pr-3 h-max flex-center cursor-pointer transition-300 hover:text-yellow" v-if="suffix">
+      <slot name="suffix"> </slot>
+    </div>
   </div>
 </template>
 
@@ -39,6 +36,7 @@
 const props = defineProps({
   type: { type: String, default: 'text' },
   placeholder: String,
+  label: String,
   modelValue: [String, Number],
   disabled: { type: Boolean, default: false },
   error: { type: Boolean, default: false },
@@ -49,8 +47,8 @@ const props = defineProps({
   min: Number,
   inputClass: [String, Array],
   wrapperClass: { type: [String, Array], default: '' },
-  prefixClass: String, // Prefix uchun sinf
-  suffixClass: String, // Suffix uchun sinf
+  prefix: { type: Boolean, default: false }, // Prefix uchun sinf
+  suffix: { type: Boolean, default: false }, // Suffix uchun sinf
   autocomplete: { type: String, default: 'new-password' },
   id: String,
   readonly: { type: Boolean, default: false },

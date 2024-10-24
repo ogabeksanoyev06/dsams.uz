@@ -1,15 +1,13 @@
 <template>
   <Transition name="fade" mode="out-in">
     <div v-if="timer" class="flex items-center gap-1">
-      <p class="font-semibold text-base leading-130 text-dark">
-        {{ $t('resend_again') }}
-      </p>
+      <p class="font-semibold text-base leading-130 text-dark">Qolgan vaqt</p>
       <p class="text-gray-300 font-semibold text-base leading-130">
         {{ time }}
       </p>
     </div>
-    <button v-else class="inline-flex items-center gap-2 bg-[#F7F7F7] rounded py-1 px-2 hover:bg-primary/10 transition-300 hover:text-primary font-semibold text-base leading-130 text-dark" @click="$emit('resend')">
-      {{ $t('resend') }}
+    <button v-else class="inline-flex items-center group gap-2 bg-gray-1 border border-transparent rounded-lg py-1 px-2  transition-300 hover:border-yellow font-medium text-sm leading-130 text-dark" @click="$emit('resend')">Qayta yuborish
+      <span class="icon-refresh-2 text-dark  transition-300"></span>
     </button>
   </Transition>
 </template>

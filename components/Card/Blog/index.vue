@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink to="/" class="relative flex flex-col rounded-xl bg-white overflow-hidden cursor-pointer transition-300 group shadow-card-2 hover:shadow-blog h-full">
+  <NuxtLink :to="localePath('/blog/slug')" class="relative flex flex-col rounded-xl bg-white overflow-hidden cursor-pointer transition-300 group shadow-card-2 hover:shadow-blog h-full">
     <div class="h-[200px] shrink-0">
       <img src="/assets/images/blog.png" alt="" class="object-cover w-full h-full object-top" />
     </div>
@@ -13,4 +13,6 @@
   </NuxtLink>
 </template>
 
-<script setup></script>
+<script setup>
+const localePath = useLocalePath()
+</script>

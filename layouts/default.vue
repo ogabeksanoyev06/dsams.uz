@@ -10,7 +10,7 @@ const dark = computed(() => y.value > 30)
 <template>
   <div class="flex min-h-screen flex-col">
     <LayoutHeader :dark />
-    <div class="flex-1 relative overflow-hidden">
+    <div class="flex-1 relative">
       <slot />
     </div>
     <LayoutFooter />

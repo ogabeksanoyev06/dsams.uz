@@ -61,3 +61,19 @@ export const share = (network, title) => {
     window.open(networks[network], '_blank') // Tanlangan tarmoqda yangi oynada ochish
   }
 }
+
+export const selectData = [
+  { id: 1, title: 'Salomatlik' },
+  { id: 2, title: 'IT va tegishli texnologiyalar' },
+  { id: 3, title: 'Transport' },
+  { id: 4, title: 'Ekologik barqarorlik' },
+  { id: 5, title: 'Menejment va xizmatlar' },
+  { id: 6, title: 'Xavfsizlik, xavfsizlik va xavf' },
+  { id: 7, title: 'Energiya' },
+  { id: 8, title: "Oziq-ovqat va qishloq xo'jaligi" },
+  { id: 9, title: 'Qurilish' },
+  { id: 10, title: 'Muhandislik' },
+  { id: 11, title: 'Materiallar' },
+  { id: 12, title: 'Xilma-xillik va inklyuziya' },
+  { id: 13, title: 'Hukumat' },
+]

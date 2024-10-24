@@ -12,8 +12,8 @@
       @click="getFile"
     >
       <Transition name="fade" mode="out-in">
-        <SvgoFile v-if="media.file" class="text-2xl leading-6 text-primary" />
-        <SvgoLink v-else class="text-2xl leading-6 text-primary" />
+        <span v-if="media.file" class="text-2xl leading-6 text-primary" />
+        <span v-else class="text-2xl leading-6 text-primary" />
       </Transition>
       <div v-if="media.file" class="flex-y-center">
         <p class="font-bold text-[#151515] leading-130 text-sm transition-300">

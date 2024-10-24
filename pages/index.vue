@@ -3,9 +3,9 @@
     <SectionSectors />
     <SectionAboutStandart />
     <SectionTopstandards />
-    <SectionSwiperOrganizations />
+    <SectionOrganizations />
     <SectionAboutUs />
-    <SectionSwiperBlog />
+    <SectionBlog />
   </div>
 </template>
 

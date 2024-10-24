@@ -2,7 +2,7 @@
   <div class="container">
     <SectionTitle :title="'Sektorlar'" link="/sectors" />
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
-      <NuxtLink to="/" v-for="item in 12">
+      <NuxtLink :to="localePath('/sectors/slug')" v-for="item in 12">
         <div class="rounded-xl bg-white border border-gray-1 p-3 flex items-center cursor-pointer transition-300 hover:shadow-card h-full gap-2 md:gap-3">
           <div class="flex-center w-10 h-10 bg-gray-1 rounded-lg p-1">
             <img src="https://cdn.commeta.uz/100x/https://cdn.commeta.uz/media/media/Wallet_Money.svg" alt="category-icon" class="w-full h-full" />
@@ -17,4 +17,6 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+const localePath = useLocalePath()
+</script>

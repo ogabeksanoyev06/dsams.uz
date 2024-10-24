@@ -6,23 +6,23 @@
       class="fixed w-full h-full bg-[#151515]/80 flex justify-center z-[100] top-0 left-0 invisible opacity-0 transition-all duration-300 items-center p-3"
       @click="handleOuterClick"
     >
-      <Transition name="modal" mode="out-in">
-        <div v-if="modelValue" class="bg-white w-full lg:max-w-[382px] shadow-xl relative max-h-screen md:overflow-y-auto rounded-2xl" :class="[bodyClass, { animated: animationIn }]">
+      <Transition :name="isMobile ? 'mobile-modal' : 'modal'" mode="out-in">
+        <div v-if="modelValue" class="bg-white w-full lg:max-w-[424px] shadow-xl relative max-h-screen invisible-scroll overflow-y-auto rounded-2xl" :class="[bodyClass, { animated: animationIn }]">
           <!-- Header qismi -->
-          <div v-if="!noHeader" class="flex items-center border-b border-solid border-[#D7D7D7] mx-5 pb-5 pt-4 rounded-t-2xl" :class="headerStyle">
+          <div v-if="!noHeader" class="flex items-center border-b border-gray-7 px-5 py-4 rounded-t-2xl" :class="headerStyle">
             <slot name="header">
-              <h3 class="w-full text-base md:text-2xl leading-130 text-[#121C25] font-bold font-mts" :class="titleStyle">
+              <h3 class="w-full text-sm md:text-xl leading-130 text-dark font-semibold" :class="titleStyle">
                 {{ title }}
               </h3>
-              <button class="text-[28px] leading-7 w-7 h-7 rounded-full text-white shrink-0 flex-center transition-300 hover:bg-transparent active:scale-95 group" @click="$emit('update:modelValue', false)">
-                <SvgoXMark class="text-[#ABABAF] group-hover:text-red transition-300" />
+              <button class="text-base sm:text-2xl shrink-0 flex-center transition-300 active:scale-95 group" @click="$emit('update:modelValue', false)">
+                <span class="icon-close text-dark group-hover:text-yellow transition-300" />
               </button>
             </slot>
           </div>
 
           <!-- Agar header bo‘lmasa, faqat close icon qo‘yiladi -->
           <button v-if="noHeader && hasCloseIcon" class="absolute -top-7 lg:-top-12 -right-0 lg:-right-[80px] active:scale-95 group" @click="$emit('update:modelValue', false)">
-            <span class="icon-x-mark text-[32px] icon-close text-white group-hover:text-blue transition-300"></span>
+            <span class="icon-close text-[32px] icon-close text-dark group-hover:text-blue transition-300"></span>
           </button>
 
           <!-- Asosiy content -->
@@ -36,6 +36,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'
+import { useWindowSize } from '@vueuse/core'
 
 // Propslarni define qilish
 const props = defineProps({
@@ -53,6 +54,14 @@ const props = defineProps({
 
 // Emits funksiyalarni tayyorlash
 const emit = defineEmits(['update:modelValue', 'outer-click'])
+
+const { width } = useWindowSize()
+const isMobile = ref(width.value <= 768)
+
+// `width` o'zgarishini kuzatamiz
+watch(width, (newWidth) => {
+  isMobile.value = newWidth <= 768
+})
 
 // Animation uchun state
 const animationIn = ref(false)
@@ -122,6 +131,24 @@ onMounted(() => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes horizontal-shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
 

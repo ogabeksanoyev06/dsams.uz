@@ -1,6 +1,7 @@
 <template>
   <button
-    :class="[variants[variant], loading ? '!cursor-progress' : 'disabled:pointer-events-none disabled:bg-gray-1 disabled:text-gray-3']"
+    :type="type"
+    :class="[wrapperClass, variants[variant], loading ? '!cursor-progress' : 'disabled:pointer-events-none disabled:bg-gray-1 disabled:text-gray-3']"
     class="rounded-xl relative duration-300 active:scale-95 py-[10px] px-3 text-sm font-semibold leading-5"
     :disabled="loading || disabled"
   >
@@ -44,12 +45,14 @@ import { computed } from 'vue'
 // Props
 const props = defineProps({
   variant: { type: String, default: 'primary' },
+  type: { type: String, default: 'button' },
   text: { type: String, default: 'Button' },
   icon: { type: String, default: '' },
   iconLeft: { type: String, default: '' },
   loading: { type: Boolean, default: false },
   disabled: { type: Boolean, default: false },
   mainClass: { type: String, default: '' },
+  wrapperClass: { type: [String, Array], default: '' },
 })
 
 // Button variants

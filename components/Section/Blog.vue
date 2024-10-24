@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-stretch relative">
+  <div class="flex items-stretch relative overflow-hidden">
     <div class="container shrink-0 relative z-0 pt-8">
       <div class="relative">
-        <SectionTitle :link-title="'Barcha tashkilotlar'" :link="'/blog'" />
+        <SectionTitle :link-title="'Barcha bloglar'" title="Blog" :link="'/blog'" />
         <div class="overflow-hidden px-[300px] -mx-[300px] md:py-5 md:-my-5 relative z-0">
           <Swiper
             class="w-full !overflow-visible !py-5"
@@ -28,7 +28,7 @@
             }"
           >
             <SwiperSlide v-for="(review, i) in 10" :key="i" class="!h-auto">
-              <NuxtLink to="/" class="relative flex flex-col rounded-2xl bg-white overflow-hidden cursor-pointer transition-300 group shadow-card-2 hover:shadow-blog h-full">
+              <NuxtLink :to="localePath('/blog/slug')" class="relative flex flex-col rounded-2xl bg-white overflow-hidden cursor-pointer transition-300 group shadow-card-2 hover:shadow-blog h-full">
                 <div class="h-[250px] shrink-0 aspect-[300/250]">
                   <div class="w-full h-full"><img alt="blog image" class="object-cover w-full h-full object-top" src="/assets/images/blog.png" /></div>
                 </div>
@@ -62,6 +62,8 @@
 </template>
 
 <script setup>
+const localePath = useLocalePath()
+
 const swiperBlog = ref(null)
 const isBeginning = ref(true)
 const isEnd = ref(false)

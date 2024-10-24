@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <SectionTitle title="Top standartlar" linkTitle="Barcha standartlar" />
+    <SectionTitle title="Top standartlar" link="/standards" linkTitle="Barcha standartlar" />
     <div class="flex flex-col gap-2 bg-white shadow-card-2 border border-gray-1 rounded-xl p-4 mb-4">
       <h3 class="text-lg sm:text-2xl xl:leading-140 font-bold">ISO: Xalqaro standartlashtirish tashkiloti</h3>
       <p class="text-sm sm:text-base text-gray-5">

@@ -13,7 +13,7 @@
                 if (el) inputs[index + 1] = el
               }
             "
-            class="w-full text-center outline-none transition-300 border border-gray-100 bg-gray-100 rounded-lg h-14 focus-within:border-primary focus-within:bg-white font-semibold text-xl text-dark leading-140 overflow-hidden"
+            class="w-full text-center outline-none transition-300 border border-gray-100 bg-gray-1 rounded-lg h-14 focus-within:border-yellow focus-within:bg-white font-semibold text-xl text-dark leading-140 overflow-hidden"
             :class="inputClass"
             pattern="[0-9]"
             :autoFocus="autoFocus && index === autoFocusIndex"

@@ -15,7 +15,7 @@
 
 @layer components {
   .container {
-    @apply !max-w-[1128px];
+    @apply !max-w-[1120px];
   }
 }
 
@@ -97,35 +97,6 @@
   }
 }
 
-
-::selection {
-  background: #0598d0;
-  color: white;
-}
-
-.section-title {
-  font-size: 32px;
-  font-weight: 800;
-  line-height: 38px;
-  letter-spacing: 0;
-}
-
-.section-subtitle {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 19px;
-  letter-spacing: 0;
-}
-
-@media screen and (max-width: 768px) {
-  .section-title {
-    font-size: 24px;
-  }
-  .section-subtitle {
-    font-size: 16px;
-  }
-}
-
 @keyframes fade {
   from {
     opacity: 0;
@@ -148,4 +119,49 @@
 
 .fade-fast-leave-active {
   animation: fade 0.1s ease-in-out reverse;
+}
+
+/*  */
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: all 0.4s;
+}
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+.select-enter-active,
+.select-leave-active {
+  transition: all 0.4s;
+}
+.select-enter-from,
+.select-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+
+
+.invisible-scroll {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* For smooth scrolling */
+}
+
+.invisible-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbar for Firefox */
+.invisible-scroll {
+  overflow: auto;
+  scrollbar-width: none; /* Hide scrollbar */
+  -ms-overflow-style: none; /* Hide scrollbar in IE 10+ */
+}
+
+.invisible-scroll::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Firefox */
 }

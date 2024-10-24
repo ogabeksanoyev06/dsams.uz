@@ -2,7 +2,7 @@
   <textarea
     v-bind="{ rows, cols, id, placeholder, maxlength }"
     :value="modelValue"
-    class="resize-y w-full !bg-gray-100 border border-transparent rounded-lg py-2.5 px-3 placeholder:text-gray text-base transition-300 sm:text-sm leading-5 text-dark font-medium bg-transparent outline-none placeholder:text-gray-200 disabled:text-gray"
+    class="resize-y w-full !bg-gray-1 border border-transparent focus:border-blue focus:!bg-white rounded-lg py-2.5 px-3 placeholder:text-dark placeholder:text-sm transition-300 sm:text-sm leading-5 text-dark bg-transparent outline-none disabled:text-gray"
     :class="{ '!border-danger': error }"
     @input="handleInput"
   ></textarea>

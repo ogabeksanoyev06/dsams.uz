@@ -27,6 +27,7 @@ export default {
           4: '#939BA9',
           5: '#4B5970',
           6: '#E9EFF9',
+          7: '#F2F2F2',
         },
       },
       boxShadow: {
@@ -38,7 +39,7 @@ export default {
         'yellow-1': '0px 6px 20px 2px rgba(255, 204, 0, 0.16)',
         'yellow-2': '0px 4px 16px 0px rgba(255, 204, 0, 0.40)',
         'swiper-btn': '0px 0px 12px 0px rgba(0, 12, 30, 0.16)',
-        'header': '0px 6px 20px 0px rgba(1, 20, 50, 0.08)',
+        header: '0px 6px 20px 0px rgba(1, 20, 50, 0.08)',
       },
       lineHeight: {
         130: '130%',

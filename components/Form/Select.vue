@@ -1,11 +1,15 @@
 <template>
   <div ref="select" class="relative" :class="wrapperStyles">
     <!--  SELECTED OPTION  -->
-    <div class="bg-white rounded-lg px-3 py-2.5 cursor-pointer flex items-center justify-between gap-3" :class="[selectedOptionStyles, { '!border-danger': error }]" @click="toggleSelect(!showOptions)">
+    <div
+      class="bg-gray-1 border border-transparent transition-300 rounded-lg px-3 py-2.5 cursor-pointer flex items-center justify-between gap-3"
+      :class="[selectedOptionStyles, { '!border-danger': error }, { ' bg-white !border-blue': showOptions }]"
+      @click="toggleSelect(!showOptions)"
+    >
       <slot name="selectedOption" :value="value">
         <div class="flex-y-center gap-1.5">
           <slot name="prefix" />
-          <div v-if="!value" class="text-gray-3 truncate text-base sm:text-sm leading-5 whitespace-nowrap" :class="placeholderClass">
+          <div v-if="!value" class="truncate text-base sm:text-sm leading-5 whitespace-nowrap" :class="placeholderClass">
             {{ placeholder }}
           </div>
           <slot v-else name="selectedOptionInner" :value="value">
@@ -26,16 +30,18 @@
 
     <!--  OPTIONS  -->
     <Transition name="select">
-      <div v-if="showOptions" :key="showOptions" class="absolute w-full bg-white border border-gray-200 rounded z-50 overflow-x-hidden max-h-[220px] scroll-style top-full translate-y-1">
+      <div v-if="showOptions" :key="showOptions" class="absolute shadow-lg w-full bg-white border border-gray-100 rounded-lg z-50 overflow-x-hidden max-h-[220px] scroll-style top-full translate-y-1">
         <slot name="options">
           <template v-if="options?.length">
-            <div v-for="(option, idx) in options" :key="idx" class="transition-all duration-200 px-3 py-2.5 hover:bg-[#F2F2F2] cursor-pointer flex-center-between border-b border-[#D7D7D7] last:border-[0px] group" @click="onSelect(option)">
+            <div v-for="(option, idx) in options" :key="idx" class="transition-all duration-200 px-3 py-2.5 hover:bg-gray-1 cursor-pointer flex-center-between border-b border-gray-100 last:border-[0px] group" @click="onSelect(option)">
               <slot name="option" :option="option" :index="idx">
-                <p class="text-base sm:text-sm leading-5 text-dark font-medium select-none" :class="{ 'font-medium': isActive(option) }">
+                <p class="text-base sm:text-sm leading-5 text-dark font-normal select-none" :class="{ 'font-medium': isActive(option) }">
                   {{ option[labelKey] }}
                 </p>
               </slot>
-              <i v-if="isActive(option)" class="icon-tick text-2xl text-blue block h-1" />
+              <svg v-if="isActive(option)" class="icon-tick text-blue block text-sm" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="m9.55 18l-5.7-5.7l1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4z" />
+              </svg>
             </div>
           </template>
           <div v-else class="text-center py-2 text-sm text-dark">No data</div>
@@ -104,3 +110,9 @@ function isActive(option) {
   return option === value.value || (value.value && value.value?.[props.valueKey] === option?.[props.valueKey]) || option?.[props.valueKey] === value.value
 }
 </script>
+
+<style scoped>
+.scroll-style::-webkit-scrollbar {
+  display: none;
+}
+</style>
