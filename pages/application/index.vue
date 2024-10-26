@@ -3,13 +3,14 @@
     <UIBreadcrumb :breadcrumb="breadcrumb" />
     <div class="py-8 container">
       <h2 class="font-bold text-xl sm:text-2xl mb-8">Ariza qoldirish</h2>
-      <div class="bg-white border border-gray-1 shadow-card-2 rounded-xl transition-300 p-5 relative overflow-hidden z-10">
+      <div class="bg-white border border-gray-1 shadow-card-2 rounded-xl transition-300 p-5 relative z-10">
         <div class="absolute bg-gray-6 h-2 w-full top-0 left-0"></div>
         <div class="absolute bg-yellow h-2 top-0 left-0 transition-all duration-300" :style="{ width: progressWidth }"></div>
 
         <Transition name="fade" mode="out-in">
           <SectionApplicationInformation v-if="currentStep === 1" />
-          <SectionApplicationExports v-else-if="currentStep === 2" />
+          <SectionApplicationQuestions v-else-if="currentStep === 2" />
+          <SectionApplicationExports v-else-if="currentStep === 3" />
         </Transition>
 
         <div class="flex items-center justify-between border-t border-gray-1 pt-5 mt-4">
@@ -30,7 +31,7 @@ const breadcrumb = [
 ]
 
 const currentStep = ref(1)
-const totalSteps = 2
+const totalSteps = 3
 
 const progressWidth = computed(() => {
   return `${(currentStep.value / totalSteps) * 100}%`

@@ -16,7 +16,7 @@
             </template>
 
             <template #suffix>
-              <button class="h-max flex-center cursor-pointer transition-300 opacity-0 scale-75 group invisible" :class="{ '!opacity-100 !scale-100 !visible': search }">
+              <button @click="clearSearch" class="h-max flex-center cursor-pointer transition-300 opacity-0 scale-75 group invisible" :class="{ '!opacity-100 !scale-100 !visible': search }">
                 <span class="icon-xmark-filled text-xl text-gray group-hover:text-red transition-300">
                   <svg class="w-[18px] h-[18px]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#101010" />
@@ -32,8 +32,32 @@
         </div>
       </div>
       <div class="grid lg:grid-cols-12 gap-6">
-        <aside class="sticky h-[calc(100vh-290px)] top-28 lg:col-span-4 hidden lg:block bg-white border border-gray-1 shadow-card-2 rounded-2xl">
-          <div class="max-h-[calc(100vh-320px)] overflow-y-auto"></div>
+        <aside class="sticky h-[calc(100vh-290px)] top-28 lg:col-span-4 hidden lg:block">
+          <div class="max-h-full overflow-y-auto invisible-scroll bg-white border border-gray-1 shadow-card-2 rounded-2xl">
+            <div class="w-full rounded-xl bg-white py-3">
+              <UIRating />
+              <div class="mt-4">
+                <h2 class="mb-3 text-sm leading-130 font-medium text-dark px-3">Kategoriyalar</h2>
+                <FormCheckbox
+                  label="Barchasi"
+                  wrapper-class="flex-grow mt-2 py-3 relative before:absolute before:bottom-0 before:right-0 before:h-px before:w-[calc(100%-44px)] before:bg-gray-1 px-3 hover:bg-yellow/10 transition-300"
+                  :checked="isAllSelected"
+                  @update:modelValue="toggleSelectAll"
+                  :indeterminate="selectedCategories.length > 0 && !isAllSelected"
+                />
+                <div class="flex flex-col">
+                  <FormCheckbox
+                    v-for="(category, index) in categories"
+                    :key="index"
+                    :label="category.label"
+                    wrapper-class="flex-grow  py-3 relative before:absolute before:bottom-0 before:right-0 before:h-px before:w-[calc(100%-44px)] before:bg-gray-1 px-3 hover:bg-yellow/10 transition-300"
+                    :checked="selectedCategories.includes(category.value)"
+                    @update:modelValue="(val) => toggleSelectCategory(category.value, val)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </aside>
         <main class="lg:col-span-8">
           <section class="companies-container">
@@ -101,18 +125,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const ratingFilter = ref('')
-const search = ref('')
-
-// Reyting variantlari
-const ratingOptions = [
-  { value: 'highest', label: 'Eng yuqori ball olganlar' },
-  { value: 'lowest', label: 'Eng past ball olganlar' },
-]
-
-const rating = ref(3)
+import { ref, watch, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const breadcrumb = [
   {
@@ -120,4 +134,86 @@ const breadcrumb = [
     link: '/profile',
   },
 ]
+
+const router = useRouter()
+const route = useRoute()
+
+const ratingFilter = ref(route.query.rating || 'all')
+const search = ref(route.query.search || '')
+const selectedCategories = ref(route.query.categories ? route.query.categories.split(',') : [])
+
+const categories = ref([
+  { label: "Sog'liq", value: 'health' },
+  { label: 'Energiya', value: 'energy' },
+  { label: 'Bino va Qurilish', value: 'construction' },
+  { label: 'IT', value: 'it' },
+  { label: 'Transport', value: 'transport' },
+  { label: "Oziq ovqat va qishloq xo'jaligi", value: 'food_agriculture' },
+  { label: 'Tozalash', value: 'cleaning' },
+])
+
+const ratingOptions = ref([
+  { value: 'all', label: 'Barcha' },
+  { value: 'high', label: 'Yuqori' },
+  { value: 'medium', label: "O'rta" },
+  { value: 'low', label: 'Past' },
+])
+
+const rating = ref(3)
+
+const isAllSelected = computed(() => {
+  return selectedCategories.value.length === categories.value.length
+})
+
+const updateQueryParams = () => {
+  const query = { ...route.query }
+  if (search.value) {
+    query.search = search.value
+  } else {
+    delete query.search
+  }
+  if (ratingFilter.value) {
+    query.rating = ratingFilter.value
+  } else {
+    delete query.rating
+  }
+  if (selectedCategories.value.length > 0) {
+    query.categories = selectedCategories.value.join(',')
+  } else {
+    delete query.categories
+  }
+
+  router.push({ query })
+}
+
+const toggleSelectAll = (isSelected) => {
+  selectedCategories.value = isSelected ? categories.value.map((cat) => cat.value) : []
+  updateQueryParams()
+}
+
+const toggleSelectCategory = (value, isSelected) => {
+  if (isSelected) {
+    selectedCategories.value.push(value)
+  } else {
+    selectedCategories.value = selectedCategories.value.filter((v) => v !== value)
+  }
+  updateQueryParams()
+}
+
+const clearSearch = () => {
+  search.value = ''
+}
+
+watch([search, ratingFilter], () => {
+  updateQueryParams()
+})
+
+onMounted(() => {
+  const { search: searchParam, rating: ratingParam, categories: categoriesParam } = route.query
+  if (searchParam) search.value = searchParam
+  if (ratingParam) ratingFilter.value = ratingParam
+  if (categoriesParam) {
+    selectedCategories.value = categoriesParam.split(',')
+  }
+})
 </script>
