@@ -41,7 +41,7 @@
               </NuxtLink>
             </div>
             <div class="flex-col justify-start items-start flex max-md:bg-white category-card-items max-md:rounded-2xl w-full max-sm:pl-0 max-md:pl-4 hover:text-yellow">
-              <NuxtLink :to="localePath('/')" class="md:first:pt-0 group/link w-full transition-300 hover:bg-white-100 pl-4">
+              <NuxtLink :to="localePath('/standard/slug')" class="md:first:pt-0 group/link w-full transition-300 hover:bg-white-100 pl-4">
                 <div class="flex w-full gap-1.5">
                   <div class="flex-center-between gap-2 w-full pr-2 border-b border-yellow/5 py-2 border-0">
                     <span class="text-dark w-full text-sm group-hover/link:text-yellow transition-300 line-clamp-2">ISO/IEC 23894:2023</span>

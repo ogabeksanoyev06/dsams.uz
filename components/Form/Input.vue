@@ -1,6 +1,6 @@
 <template>
   <div class="bg-gray-1 border border-transparent transition-300 focus-within:!bg-white overflow-hidden focus-within:border-blue flex items-center rounded-lg" :class="[wrapperClass, { '!border-danger': error }]">
-    <div class="pl-3 h-max flex-center cursor-pointer transition-300" v-if="prefix">
+    <div class="pl-3 pointer-events-none flex-center cursor-pointer transition-300" v-if="prefix">
       <slot name="prefix"> </slot>
     </div>
     <input
@@ -17,7 +17,7 @@
         id,
       }"
       ref="Input"
-      class="w-full h-full sm:text-base text-sm p-3 text-dark bg-transparent placeholder:text-dark placeholder:sm:text-base outline-none disabled:cursor-not-allowed"
+      class="w-full h-full sm:text-base text-sm p-3 text-dark bg-transparent placeholder:text-dark placeholder:sm:text-base outline-none disabled:cursor-not-allowed disabled:opacity-50"
       :value="modelValue"
       :class="[inputClass]"
       @keyup.enter="handleEnter"

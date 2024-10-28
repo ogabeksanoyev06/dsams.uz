@@ -10,13 +10,11 @@
         <div class="col-span-12 lg:col-span-5">
           <FormInput prefix suffix v-model="search" placeholder="Qidirish uchun kiriting..." inputClass="" wrapperClass="!bg-white">
             <template #prefix>
-              <div class="h-max pl-3 pr-3 pointer-events-none flex-center">
-                <span class="icon-search flex-center text-lg h-[18px]"></span>
-              </div>
+              <span class="icon-search flex-center text-lg h-[18px]"></span>
             </template>
 
             <template #suffix>
-              <button class="px-3 h-max flex-center cursor-pointer transition-300 opacity-0 scale-75 group invisible" :class="{ '!opacity-100 !scale-100 !visible': search }">
+              <button class="h-max flex-center cursor-pointer transition-300 opacity-0 scale-75 group invisible" :class="{ '!opacity-100 !scale-100 !visible': search }">
                 <span class="icon-xmark-filled text-xl text-gray group-hover:text-red transition-300">
                   <svg class="w-[18px] h-[18px]" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#101010" />

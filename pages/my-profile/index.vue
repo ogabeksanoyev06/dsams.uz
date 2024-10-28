@@ -4,6 +4,7 @@ definePageMeta({
 })
 
 const editProfileModal = ref(false)
+const editEmailModal = ref(false)
 </script>
 
 <template>
@@ -66,7 +67,13 @@ const editProfileModal = ref(false)
           <div class="col-span-6">
             <VField name="name">
               <FormGroup label="Email" for-id="father_name">
-                <FormInput placeholder="Email" id="father_name" type="email" />
+                <FormInput disabled suffix placeholder="exam@gmail.com" id="father_name" type="email">
+                  <template #suffix>
+                    <button type="button" @click="editEmailModal = true">
+                      <span class="icon-edit text-xl"></span>
+                    </button>
+                  </template>
+                </FormInput>
               </FormGroup>
             </VField>
           </div>
@@ -104,5 +111,6 @@ const editProfileModal = ref(false)
       </div>
     </VForm>
     <ModalProfileEditPhone v-model="editProfileModal" />
+    <ModalProfileEditEmail v-model="editEmailModal" />
   </div>
 </template>

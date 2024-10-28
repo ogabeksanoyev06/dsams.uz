@@ -46,13 +46,11 @@ const changeTab = (id) => {
   <div class="flex min-h-screen flex-col">
     <LayoutHeader :dark />
     <UIBreadcrumb :breadcrumb="breadcrumb" />
-
     <div class="container flex-1 relative">
       <UITab :model-value="tab" :list="tabList" @update:model-value="changeTab" class="lg:hidden" />
-
       <div class="grid lg:grid-cols-[300px_minmax(0,1fr)] gap-6 mt-8 items-start">
         <aside class="sticky h-[calc(100vh-150px)] top-24 hidden lg:block">
-          <div class="flex flex-col items-center justify-center gap-5 bg-white border border-gray-1 shadow-card-2 rounded-[20px] overflow-hidden mb-6 pt-5 pb-12">
+          <!-- <div class="flex flex-col items-center justify-center gap-5 bg-white border border-gray-1 shadow-card-2 rounded-[20px] overflow-hidden mb-6 pt-5 pb-12">
             <div class="w-[88px] h-[88px] shrink-0 rounded-full border border-white-100 relative overflow-hidden flex-center cursor-pointer group">
               <img alt="profile-avatar" class="w-full h-full object-cover" />
             </div>
@@ -70,35 +68,53 @@ const changeTab = (id) => {
                 <span>+998 (93) 472 93 35</span>
               </a>
             </div>
-          </div>
+          </div> -->
           <div class="bg-white border border-gray-1 shadow-card-2 rounded-[20px] overflow-hidden">
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
+            <NuxtLink
+              :to="localePath('/my-profile')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Mening ma'lumotlarim </span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
+            <NuxtLink
+              :to="localePath('/my-profile/exports')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Exportlar</span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
+            <NuxtLink
+              :to="localePath('/my-profile/notifications')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Xabarnomalar </span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
-              <span class="text-sm">Saqlanganlar</span>
+            <NuxtLink
+              :to="localePath('/my-profile/saved')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
+              <span class="text-sm archive-add">Saqlanganlar</span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
+            <NuxtLink
+              :to="localePath('/my-profile/export-history')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Export tarixi</span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
-            <NuxtLink :to="localePath('/')" class="flex items-center gap-[10px] py-4 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium">
-              <span class="icon-notification text-2xl transition-300"></span>
+            <NuxtLink
+              :to="localePath('/my-profile/organization-history')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Tashkilot tarixi</span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>

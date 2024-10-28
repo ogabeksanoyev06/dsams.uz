@@ -19,7 +19,7 @@
             <div class="shrink-0 bg-gray-3 relative w-px h-7"></div>
             <LayoutHeaderLanguageSwitcher class="max-md:hidden" />
             <div class="shrink-0 bg-gray-3 relative w-px h-7"></div>
-            <NuxtLink :to="localePath('/')">
+            <NuxtLink :to="localePath('/my-profile/saved')">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
                   fill-rule="evenodd"
@@ -30,7 +30,7 @@
               </svg>
             </NuxtLink>
             <div class="shrink-0 bg-gray-3 relative w-px h-7"></div>
-            <NuxtLink :to="localePath('/')">
+            <NuxtLink :to="localePath('/my-profile/notifications')">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path
                   fill-rule="evenodd"

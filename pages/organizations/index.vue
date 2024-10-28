@@ -70,7 +70,7 @@
                 <FormSelect v-model="ratingFilter" :options="ratingOptions" label-key="label" value-key="value" placeholder="Reyting" selectedOptionStyles="sm:min-w-[272px] max-sm:w-full !bg-white" />
               </div>
               <div class="flex flex-col gap-5">
-                <div class="bg-white company-card rounded-xl transition-300 border-b border-gray-1 shadow-card-2 hover:shadow-none" v-for="item in 10">
+                <NuxtLink :to="localePath('/organizations/slug')" class="bg-white company-card rounded-xl transition-300 border-b border-gray-1 shadow-card-2 hover:shadow-none" v-for="item in 10">
                   <div class="p-3 md:p-4 max-md:pb-2 flex md:justify-between items-start w-full gap-4 cursor-pointer">
                     <div class="flex-y-center gap-2 md:gap-4 w-full">
                       <div class="shrink-0">
@@ -111,7 +111,7 @@
                       <span class="icon-archive-add text-lg text-gray-5"></span>
                     </button>
                   </div>
-                </div>
+                </NuxtLink>
               </div>
               <div class="flex-center mt-3">
                 <UIButton class="w-full text-white"> Yana yuklash </UIButton>
@@ -134,6 +134,7 @@ const breadcrumb = [
     link: '/profile',
   },
 ]
+const localePath = useLocalePath()
 
 const router = useRouter()
 const route = useRoute()
