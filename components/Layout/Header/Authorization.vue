@@ -21,6 +21,12 @@ const menuItems = [
     route: '/my-profile/saved',
     hoverColor: 'text-yellow',
   },
+  {
+    label: 'Tashkilotni baholash',
+    icon: 'icon-archive-add',
+    route: '/my-profile/saved',
+    hoverColor: 'text-yellow',
+  },
 ]
 
 const authModal = ref(false)

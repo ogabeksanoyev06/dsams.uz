@@ -143,8 +143,6 @@
   transform: translateY(-10px);
 }
 
-
-
 .invisible-scroll {
   overflow: auto;
   -webkit-overflow-scrolling: touch; /* For smooth scrolling */
@@ -164,4 +162,15 @@
 
 .invisible-scroll::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Firefox */
+}
+
+/*  */
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #f5c502;
+  border-radius: 10px;
 }

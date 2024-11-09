@@ -40,7 +40,7 @@ export const useLanguageSwitcher = () => {
     }
   }
 
-  async function changeLocale(_locale: string) {
+  async function changeLocale() {
     //
   }
 

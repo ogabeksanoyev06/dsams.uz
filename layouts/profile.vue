@@ -83,6 +83,14 @@ const changeTab = (id) => {
               class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
             >
               <span class="icon-notification text-2xl"></span>
+              <span class="text-sm">Tashkilotni baholash</span>
+              <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
+            </NuxtLink>
+            <NuxtLink
+              :to="localePath('/my-profile/exports')"
+              class="[&.router-link-exact-active]:!bg-gray-1 [&.router-link-exact-active]:!text-yellow flex items-center gap-[10px] py-3 pl-4 cursor-pointer transition-300 hover:bg-gray-1 group relative font-medium"
+            >
+              <span class="icon-notification text-2xl"></span>
               <span class="text-sm">Exportlar</span>
               <hr class="absolute bottom-0 bg-gray-1 h-px w-full left-0 border-none" />
             </NuxtLink>
