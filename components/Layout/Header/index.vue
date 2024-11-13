@@ -14,9 +14,9 @@
           </nav>
         </div>
         <div class="flex flex-1 items-center justify-between space-x-4 lg:space-x-6 xl:space-x-8 md:justify-end">
-          <LayoutHeaderApplication />
+          <LayoutHeaderApplication v-if="checkAuth" />
           <div class="flex items-center space-x-4">
-            <div class="shrink-0 bg-gray-3 relative w-px h-7"></div>
+            <div class="shrink-0 bg-gray-3 relative w-px h-7" v-if="checkAuth"></div>
             <LayoutHeaderLanguageSwitcher class="max-md:hidden" />
             <div class="shrink-0 bg-gray-3 relative w-px h-7"></div>
             <NuxtLink :to="localePath('/my-profile/saved')">
@@ -62,6 +62,8 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '@/stores/auth.js'
+
 defineProps({
   dark: {
     type: Boolean,
@@ -71,6 +73,9 @@ defineProps({
 const localePath = useLocalePath()
 
 const route = useRoute()
+
+const authStore = useAuthStore()
+const { checkAuth } = authStore
 
 const links = [
   { to: '/standards', text: 'Standartlar', name: 'standards' },

@@ -30,7 +30,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL || '',
+      apiBaseUrl: process.env.API_BASE_URL || 'http://81.95.236.109:3000/api',
     },
   },
   build: {

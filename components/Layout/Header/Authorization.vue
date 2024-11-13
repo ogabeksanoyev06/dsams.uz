@@ -1,6 +1,11 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth.js'
+
 const localePath = useLocalePath()
 const router = useRouter()
+
+const authStore = useAuthStore()
+const { checkAuth } = authStore
 
 const menuItems = [
   {
@@ -44,9 +49,9 @@ function handleClick(item) {
 </script>
 
 <template>
-  <UIButton :text="false ? 'profile' : 'Kirish'" wrapperClass="!py-[7px] px-0 max-w-[150px] w-full !rounded-lg shadow-yellow-1 border-[1.5px] border-white/[0.12]" @click="user?.id ? $router.push(localePath('/profile')) : (authModal = true)" />
+  <UIButton v-if="!checkAuth" text="Kirish" wrapperClass="!py-[7px] px-0 max-w-[150px] w-full !rounded-lg shadow-yellow-1 border-[1.5px] border-white/[0.12]" @click="authModal = true" />
 
-  <UIDropdown :show="showDropdown" :head-class="['flex items-center gap-2 text-dark cursor-pointer py-2 transition-colors duration-300']" body-class="!min-w-[250px]" @toggle="handleDropdownToggle">
+  <UIDropdown v-else :show="showDropdown" :head-class="['flex items-center gap-2 text-dark cursor-pointer py-2 transition-colors duration-300']" body-class="!min-w-[250px]" @toggle="handleDropdownToggle">
     <template #head>
       <div class="w-9 h-9 rounded-full linear-border-image cursor-pointer">
         <img src="https://web.xolodilnikgo.uz/web/image/res.partner/4351/image_1024/" alt="user" class="w-full h-full object-cover object-center rounded-full" />
