@@ -113,8 +113,8 @@
             <div class="mb-6 grid gap-4 md:grid-cols-12">
               <div class="grid gap-1.5 md:col-span-4">
                 <UiLabel for="company-services">Sektorlar</UiLabel>
-                <UiSelect v-model="values.sektor" :error="$v.sektor?.$error">
-                  <UiSelectTrigger placeholder="Tanlang" />
+                <UiSelect v-model="values.sektor">
+                  <UiSelectTrigger placeholder="Tanlang" :error="$v.sektor?.$error" />
                   <UiSelectContent>
                     <UiSelectGroup>
                       <UiSelectItem v-for="sector in data.sectors.data" :key="sector._id" :value="sector._id" :text="sector.name_uz" />
@@ -125,8 +125,8 @@
 
               <div class="grid gap-1.5 md:col-span-4">
                 <UiLabel for="company-services">Bo'limlar</UiLabel>
-                <UiSelect v-model="values.sections" :error="$v.sections?.$error" :disabled="!values.sektor || loadingSection">
-                  <UiSelectTrigger>
+                <UiSelect v-model="values.sections" :disabled="!values.sektor || loadingSection">
+                  <UiSelectTrigger :error="$v.sections?.$error">
                     <Icon v-if="loadingSection" name="lucide:loader" class="h-4 w-4 shrink-0 animate-spin text-muted-foreground opacity-70" />
                   </UiSelectTrigger>
                   <UiSelectContent>
@@ -138,8 +138,8 @@
               </div>
               <div class="grid gap-1.5 md:col-span-4">
                 <UiLabel for="company-services">Standardlar</UiLabel>
-                <UiSelect v-model="values.standart" :error="$v.standart?.$error">
-                  <UiSelectTrigger placeholder="Tanlang" />
+                <UiSelect v-model="values.standart">
+                  <UiSelectTrigger placeholder="Tanlang" :error="$v.standart?.$error" />
                   <UiSelectContent>
                     <UiSelectGroup>
                       <UiSelectItem v-for="standard in data.standards.data" :key="standard._id" :value="standard._id" :text="standard.name" />
@@ -267,7 +267,7 @@
     currentTab.value = value;
   };
 
-  const currentStep = ref(1);
+  const currentStep = ref(2);
   const totalSteps = 3;
 
   const answers = ref([]);
@@ -308,12 +308,7 @@
       sektor: null,
       standart: null,
       sections: null,
-      answers: [
-        {
-          question_id: 1,
-          answer: "answer",
-        },
-      ],
+      answers: [],
     },
     {
       company: {
