@@ -1,0 +1,56 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.10.3",
+    "@nuxtjs/i18n": "^9.1.1",
+    "@pinia/nuxt": "^0.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
+    "axios": "^1.7.9",
+    "dayjs-nuxt": "^2.1.11",
+    "eslint": "^9.16.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-vue": "^9.32.0",
+    "nuxt": "^3.14.1592",
+    "nuxt-swiper": "^1.2.2",
+    "pinia": "^2.3.0",
+    "radix-vue": "^1.9.10",
+    "tailwind-variants": "^0.3.0",
+    "vee-validate": "^4.14.7",
+    "vue": "latest",
+    "vue-router": "latest",
+    "vue-tel-input": "^9.2.0",
+    "vue-toastification": "^2.0.0-rc.5"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.4.0",
+    "@nuxt/icon": "^1.9.0",
+    "@nuxtjs/color-mode": "^3.5.2",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@samk-dev/nuxt-vcalendar": "^1.0.4",
+    "@tailwindcss/forms": "^0.5.9",
+    "@vueuse/core": "^12.0.0",
+    "@vueuse/nuxt": "^12.0.0",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
