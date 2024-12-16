@@ -5,6 +5,8 @@ export const useApplicationStore = defineStore("application", () => {
   const api = useApi();
 
   const loading = ref(false);
+  const loadingStandard = ref(false);
+  const questionsWithAnswers = ref([]);
 
   const createApplication = async (form) => {
     loading.value = true;
@@ -47,10 +49,13 @@ export const useApplicationStore = defineStore("application", () => {
 
   const getApplicationById = async (id) => {
     try {
+      loadingStandard.value = true;
       const response = await api.get(`experts/applications/${id}`);
       return response.data;
     } catch (error) {
       throw error;
+    } finally {
+      loadingStandard.value = false;
     }
   };
 
@@ -66,5 +71,14 @@ export const useApplicationStore = defineStore("application", () => {
     }
   };
 
-  return { createApplication, getAllApplications, getAllExports, getApplicationsUseAFilter, getApplicationById, rateApplication, loading };
+  return {
+    createApplication,
+    getAllApplications,
+    getAllExports,
+    getApplicationsUseAFilter,
+    getApplicationById,
+    rateApplication,
+    questionsWithAnswers,
+    loading,
+  };
 });

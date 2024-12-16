@@ -4,7 +4,7 @@
       <span class="text-sm font-semibold">{{ letter }}</span>
     </div>
     <h3 class="!leading-130 my-auto w-full text-sm font-medium max-md:text-center md:line-clamp-2 md:text-sm">
-      {{ formattedName || "No title provided" }}
+      {{ formattedName }}
     </h3>
   </NuxtLink>
 </template>

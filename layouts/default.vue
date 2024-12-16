@@ -9,11 +9,15 @@
 </template>
 
 <script setup>
+  import { useCustomToast } from "@/composables/useCustomToast.js";
   import { useProfileStore } from "@/stores/profile";
+  import { useRouter } from "vue-router";
+
+  const router = useRouter();
+  const { showToast } = useCustomToast();
 
   const { locale } = useI18n();
-
-  const { localePath } = useLocalePath();
+  const localePath = useLocalePath();
 
   const accessToken = useCookie("user_token");
   const roleCookie = useCookie("role");
@@ -31,4 +35,11 @@
     }
     return null;
   });
+
+  if (profileData.value) {
+    if (!user.value?.data?.name || !user.value?.data?.surname || !user.value?.data?.father_name || !user.value?.data?.phone_number) {
+      showToast("Ma'lumotlaringizni to'ldiring!", "info");
+      router.push(localePath("/profile"));
+    }
+  }
 </script>

@@ -27,14 +27,15 @@
   const sektorStore = useSektorStore();
 
   const { getSektors } = sektorStore;
-  const { sectors } = storeToRefs(sektorStore);
+  const sectors = ref([]);
 
   const { locale } = useI18n();
   const loading = ref(true);
 
   onMounted(async () => {
     try {
-      await getSektors({ lang: locale.value, limit: 9, page: 1 });
+      const res = await getSektors({ lang: locale.value, limit: 9, page: 1 });
+      sectors.value = res.data;
     } catch (error) {
       console.error("Sektorlarni olishda xatolik:", error);
     } finally {

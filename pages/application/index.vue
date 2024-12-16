@@ -94,6 +94,7 @@
             <h3 class="mb-4 text-lg font-semibold sm:max-w-[80%]">Tashkilotning tekshirishga tayyor bo'lish muddati. Dastlabki baholashni o'tkazish uchun taklif qilingan muddat (agar kerak bo'lsa)</h3>
             <div class="mb-6 grid gap-4 md:grid-cols-12">
               <div class="grid gap-1.5 md:col-span-6">
+                {{ new Date(values.company.term).getTime() }}
                 <UiLabel for="company-date">Baholashni o'tkazish uchun taklif qilingan muddat</UiLabel>
                 <UiDatepicker v-model="values.company.term" :error="$v.company.term?.$error">
                   <template #default="{ togglePopover }">
@@ -189,11 +190,7 @@
                     <UiTableBody class="last:border-b-0">
                       <UiTableRow v-for="(exp, key) in data.exports?.data" :key>
                         <UiTableCell>
-                          <UiCheckbox
-                            :checked="isChecked(exp._id) || !(generalExportList.includes(exp._id) && tab.value === 'secondary')"
-                            :disabled="generalExportList.includes(exp._id) && tab.value === 'secondary'"
-                            @update:checked="updateExportList(exp._id, $event)"
-                          />
+                          <UiCheckbox :checked="isChecked(exp._id)" @update:checked="updateExportList(exp._id, $event)" />
                         </UiTableCell>
                         <UiTableCell> {{ exp.email }} </UiTableCell>
                         <UiTableCell> {{ exp.surname }} {{ exp.name }} {{ exp.father_name }} </UiTableCell>
@@ -267,7 +264,7 @@
     currentTab.value = value;
   };
 
-  const currentStep = ref(2);
+  const currentStep = ref(1);
   const totalSteps = 3;
 
   const answers = ref([]);
@@ -308,7 +305,7 @@
       sektor: null,
       standart: null,
       sections: null,
-      answers: [],
+      answers: answers.value,
     },
     {
       company: {
@@ -369,7 +366,7 @@
           exportList.value.push(key);
         }
       } else {
-        exportList.value = exportList.value.filter((item) => item !== key);
+        exportList.value = exportList.value?.filter((item) => item !== key);
       }
     }
   };
@@ -382,14 +379,14 @@
       } else {
         answers.value.push({
           question_id: data?.questionId,
-          answer_url: data?.file,
+          answer_url: "url",
         });
       }
     }
   };
 
   const handleError = (error, questionId) => {
-    const questionExists = standard.value.questions.some((q) => q._id === questionId);
+    const questionExists = standard.value.questions?.some((q) => q._id === questionId);
     if (questionExists) {
       errorMap.value[questionId] = error;
     }
@@ -425,17 +422,12 @@
             t_workers: values.company.t_workers,
             s_workers: values.company.s_workers,
             work_time: values.company.work_time,
-            date: Number(dayjs(values.company.date).format("DDMMYYYY")),
+            date: values.company.term?.getTime(),
           },
           sektor: values.sektor,
           standart: values.standart,
           sections: [values.sections],
-          answers: [
-            {
-              question_id: "6734d1bfca409375f2932185",
-              answer_url: "http://example.com/answer1",
-            },
-          ],
+          answers: answers.value,
         });
         if (res.status) {
           showToast("Arizangiz muvaffaqiyatli yuborildi", "success");

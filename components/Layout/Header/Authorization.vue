@@ -31,18 +31,7 @@
             <span>Profil</span>
           </UiDropdownMenuItem>
         </NuxtLink>
-        <NuxtLink to="/profile/assessments">
-          <UiDropdownMenuItem class="cursor-pointer">
-            <Icon class="h-[18px] w-[18px]" name="lucide:chart-bar" />
-            <span>Baholash</span>
-          </UiDropdownMenuItem>
-        </NuxtLink>
-        <NuxtLink to="/help">
-          <UiDropdownMenuItem class="cursor-pointer">
-            <Icon class="h-[18px] w-[18px]" name="lucide:circle-help" />
-            <span>Yordam</span>
-          </UiDropdownMenuItem>
-        </NuxtLink>
+
         <UiDropdownMenuSeparator class="mx-1.5 bg-muted" />
         <UiDropdownMenuItem class="cursor-pointer hover:!text-destructive" @click="logout">
           <Icon class="h-[18px] w-[18px]" name="lucide:log-out" />
