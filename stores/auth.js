@@ -4,7 +4,6 @@ import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", () => {
   const api = useApi();
-  const localePath = useLocalePath();
   const router = useRouter();
 
   const { showToast } = useCustomToast();
@@ -71,7 +70,7 @@ export const useAuthStore = defineStore("auth", () => {
   const logout = async () => {
     showToast("Tizimdan chiqdingiz", "success");
     accessToken.value = null;
-    await router.push(localePath("/"));
+    await router.push("/");
   };
 
   return {

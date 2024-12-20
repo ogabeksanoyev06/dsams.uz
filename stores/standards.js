@@ -12,7 +12,7 @@ export const useStandardsStore = defineStore("standards", () => {
       const response = await api.get("users/standarts", { params });
       standards.value = response.data.data;
       return response.data;
-    } catch {
+    } catch (error) {
       throw error;
     }
   };

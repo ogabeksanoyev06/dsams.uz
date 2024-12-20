@@ -1,14 +1,23 @@
 <template>
   <div class="grid gap-4">
-    <div class="flex flex-col gap-2 rounded-xl p-4 shadow-md" v-for="item in questionsWithAnswers">
-      <div class="question" v-html="item.description_uz" />
-      <a :href="item.answer_url" target="_blank">{{ item.answer_url ? "Yuklangan fayl" : "Fayl mavjud emas" }}</a>
-      <UiButton variant="outline" @click="openDialog(item.answer_id)">Ball qo'yish</UiButton>
+    <div class="relative flex flex-col gap-2 overflow-hidden rounded-xl border border-border/50 p-2 sm:p-4" v-for="(item, i) in questionsWithAnswers" :class="{ 'shadow-sm shadow-orange-300': item.status }">
+      <div class="mt-7 flex flex-col gap-2 sm:flex-row">
+        <span class="flex-center h-7 w-7 flex-shrink-0 rounded-full bg-primary leading-normal text-xs font-semibold text-white">{{ i + 1 }}</span>
+        <div class="question text-sm leading-6" v-html="item.description_uz" />
+      </div>
+      <a :href="item.answer_url" target="_blank" class="mt-2 text-sm">Fayl: <span class="font-semibold text-blue-500">Ko'rish</span></a>
+      <div class="mt-5 flex gap-2 sm:justify-end">
+        <UiButton variant="outline" class="max-sm:w-full" @click="openDialog(item)" :disabled="!item.answer_url">Ball qo'yish</UiButton>
+      </div>
+      <div v-if="item.status" class="flex-center absolute right-5 top-0 h-6 w-7 rounded-b-xl bg-primary text-xs font-semibold text-white">{{ item.ball }}</div>
+      <div v-if="!item.answer_url" class="absolute inset-0 flex items-center justify-center backdrop-blur-sm">
+        <span class="rounded-sm bg-primary px-2 py-1 text-sm"> Fayl mavjud emas</span>
+      </div>
     </div>
     <UiDialog v-model:open="dialog">
-      <UiDialogContent class="sm:max-w-[425px]">
+      <UiDialogContent class="sm:max-w-[425px]" title="Ball qo'yish" description="Sizda urunishlar soni faqat 1 ta. Iltimos e'tiborli bo'ling.">
         <template #content>
-          <div class="grid gap-4 py-4">
+          <div class="grid gap-4">
             <div class="grid gap-2">
               <UiLabel for="name" class="text-right"> Tanlang </UiLabel>
               <UiSelect v-model="selectedScore">
@@ -37,6 +46,8 @@
 <script setup>
   import { useCustomToast } from "@/composables/useCustomToast.js";
   import { useApplicationStore } from "@/stores/application.js";
+  import { useProfileStore } from "@/stores/profile.js";
+  import { useI18n } from "vue-i18n";
 
   definePageMeta({
     layout: "profile",
@@ -46,11 +57,12 @@
   const route = useRoute();
 
   const applicationStore = useApplicationStore();
+  const profileStore = useProfileStore();
 
   const { getApplicationById, rateApplication } = applicationStore;
   const { questionsWithAnswers } = storeToRefs(applicationStore);
+  const { user } = storeToRefs(profileStore);
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const loading = ref(false);
@@ -59,9 +71,12 @@
   const dialog = ref(false);
   const answerId = ref(null);
 
-  const openDialog = (id) => {
-    answerId.value = id;
+  const selectedQuestion = ref(null);
+
+  const openDialog = (item) => {
+    answerId.value = item.answer_id;
     dialog.value = true;
+    selectedQuestion.value = item;
   };
 
   const handleSubmit = async () => {
@@ -73,6 +88,10 @@
       });
       if (res.status) {
         showToast(res.message, "success");
+        selectedQuestion.value.status = true;
+        selectedQuestion.value.ball = selectedScore.value;
+        dialog.value = false;
+        selectedScore.value = scores[0];
       }
     } catch (error) {
       showToast(error.response?.data?.message, "error");
@@ -87,14 +106,34 @@
     const questions = response.data.standart?.questions || [];
     const answers = response.data?.answers || [];
 
+    const mainUser = response.data?.experts?.main || {};
+    const secondaryUsers = response.data?.experts?.secondary || [];
+    const currentUserEmail = user.value?.data?.email;
+
+    let ratings = [];
+
+    if (mainUser.id?.email === currentUserEmail) {
+      ratings = mainUser.rating || [];
+    } else {
+      const foundUser = secondaryUsers.find((u) => u.id?.email === currentUserEmail);
+      if (foundUser) {
+        ratings = foundUser.rating || [];
+      }
+    }
+
     questionsWithAnswers.value = questions.map((question) => {
-      const answer = answers.find((ans) => ans.question_id === question._id);
+      const answer = answers?.find((ans) => ans.question_id === question._id);
+      const rating = ratings?.find((rate) => rate.answer_id === answer?._id);
+
       return {
         ...question,
+        status: rating ? rating.status : answer ? answer.status : false,
+        ball: rating ? rating.ball : answer ? answer.ball : 0,
         answer_id: answer ? answer._id : null,
         answer_url: answer ? answer.answer_url : null,
       };
     });
+
     return response;
   });
 </script>

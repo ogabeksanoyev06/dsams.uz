@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="localePath(`/blogs/${item?._id}`)" class="transition-300 group relative inline-block cursor-pointer overflow-hidden rounded-xl border bg-background shadow-sm hover:shadow-md">
+  <NuxtLink :to="`/blogs/${item?._id}`" class="transition-300 group relative inline-block cursor-pointer overflow-hidden rounded-xl border bg-background shadow-sm hover:shadow-md">
     <div class="relative aspect-[382/255] w-full overflow-hidden rounded-t-xl">
       <UiImage :src="item?.photo_url" alt="qwe" class="h-full w-full object-cover duration-300 group-hover:scale-105" />
     </div>
@@ -19,5 +19,4 @@
       type: Object,
     },
   });
-  const localePath = useLocalePath();
 </script>

@@ -29,12 +29,12 @@
 
 <script setup>
   import { useBlogsStore } from "@/stores/blogs.js";
+  import { useI18n } from 'vue-i18n'
 
   const blogStore = useBlogsStore();
 
   const { getBlogs } = blogStore;
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const limit = ref(10);

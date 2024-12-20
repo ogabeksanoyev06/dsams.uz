@@ -64,7 +64,9 @@
       role: ["user"],
     },
   ];
-  const { data: profileData, error } = await useAsyncData("profileData", async () => {
+  const filteredMenuItems = computed(() => sidebarNavItems.filter((item) => item.role.includes(roleCookie.value)));
+
+  const { data: profileData } = await useAsyncData("layout", async () => {
     if (accessToken.value && roleCookie.value) {
       if (roleCookie.value === "user") {
         return await getProfileUser();
@@ -72,6 +74,6 @@
         return await getProfileExport();
       }
     }
+    return null;
   });
-  const filteredMenuItems = computed(() => sidebarNavItems.filter((item) => item.role.includes(roleCookie.value)))
 </script>

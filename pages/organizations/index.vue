@@ -73,7 +73,7 @@
   import { useOrganizationsStore } from "@/stores/organizations.js";
 
   definePageMeta({
-    middleware: ["auth"],
+    middleware: ["authUser"],
   });
 
   const organizationsStore = useOrganizationsStore();

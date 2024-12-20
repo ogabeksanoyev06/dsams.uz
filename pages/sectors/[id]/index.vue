@@ -14,6 +14,7 @@
 
 <script setup>
   import { useSektorStore } from "@/stores/sektors.js";
+  import { useI18n } from "vue-i18n";
 
   const sektorStore = useSektorStore();
 

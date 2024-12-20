@@ -17,10 +17,10 @@
         <div class="text-sm font-semibold">
           <div class="relative mb-2 flex flex-col items-center justify-center gap-y-3 rounded-md bg-muted px-2 py-4">
             <div class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-muted">
-              <img src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+              <img src="/assets/images/placeholder.png" alt="" />
             </div>
             <div class="flex flex-col items-center justify-center" v-if="user">
-              <span class="text-sm font-medium">{{ user?.data?.name + " " + user?.data?.surname }}</span>
+              <span class="text-sm font-medium"> {{ user?.data?.name && user?.data?.surname ? user.data.name + " " + user.data.surname : "" }}</span>
               <span class="text-xs text-muted-foreground">{{ user?.data?.email }}</span>
             </div>
           </div>
@@ -56,7 +56,6 @@
   const accessToken = useCookie("user_token");
 
   const { showToast } = useCustomToast();
-  const localePath = useLocalePath();
   const router = useRouter();
 
   const { user } = storeToRefs(profileStore);

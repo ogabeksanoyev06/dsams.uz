@@ -4,13 +4,13 @@
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-2 sm:gap-5">
           <UiButton @click="open = !open" variant="secondary" class="lg:hidden" size="icon-sm"> <Icon class="size-4" name="heroicons:bars-2" /> </UiButton>
-          <NuxtLink :to="localePath('/')">
+          <NuxtLink to="/">
             <img src="/assets/svg/logo.svg" alt="" />
           </NuxtLink>
         </div>
         <nav class="hidden items-center space-x-1 text-sm font-medium lg:flex">
           <NuxtLink
-            :to="localePath(item.route)"
+            :to="item.route"
             v-for="(item, key) in nav"
             :key
             class="rounded-lg bg-transparent px-3 py-2 text-foreground/60 transition-colors hover:bg-muted hover:text-foreground [&.router-link-exact-active]:bg-muted [&.router-link-exact-active]:text-foreground"
@@ -20,10 +20,10 @@
         </nav>
       </div>
       <div class="flex flex-1 items-center justify-end space-x-2">
-        <NuxtLink :to="localePath('/application')" v-if="roleCookie === 'user'">
+        <NuxtLink to="/application" v-if="roleCookie === 'user'">
           <UiButton variant="outline" size="sm" class="max-sm:hidden">
             <Icon class="size-4" name="lucide:mail-open" />
-            {{ t("menu.submit_application") }}
+            Ariza qoldirish
           </UiButton>
         </NuxtLink>
         <LayoutHeaderLanguageSwitcher />
@@ -38,7 +38,7 @@
           <div class="grid gap-6">
             <nav class="mt-6 grid gap-2 text-base">
               <NuxtLink
-                :to="localePath(item.route)"
+                :to="item.route"
                 v-for="(item, key) in nav"
                 :key
                 class="rounded-lg bg-transparent px-3 py-2 text-foreground/60 transition-colors hover:bg-muted hover:text-foreground [&.router-link-exact-active]:bg-muted [&.router-link-exact-active]:text-foreground"
@@ -46,10 +46,10 @@
                 {{ item.name }}
               </NuxtLink>
             </nav>
-            <NuxtLink :to="localePath('/application')" v-if="accessToken && roleCookie === 'user'">
+            <NuxtLink to="/application" v-if="accessToken && roleCookie === 'user'">
               <UiButton variant="outline" size="sm" class="w-full">
                 <Icon class="size-4" name="lucide:mail-open" />
-                {{ t("menu.submit_application") }}
+                Ariza qoldirish
               </UiButton>
             </NuxtLink>
           </div>
@@ -65,8 +65,8 @@
 <script setup>
   import { useI18n } from "vue-i18n";
 
-  const localePath = useLocalePath();
   const { t } = useI18n();
+
   const route = useRoute();
 
   const open = ref(false);
@@ -77,23 +77,23 @@
   const nav = computed(() => {
     return [
       {
-        name: t("menu.sektors"),
+        name: t("sectors"),
         route: "/sectors",
       },
       {
-        name: t("menu.standards"),
+        name: t("standards"),
         route: "/standards",
       },
       {
-        name: t("menu.organizations"),
+        name: t("organizations"),
         route: "/organizations",
       },
       {
-        name: t("menu.about_us"),
+        name: t("about"),
         route: "/about",
       },
       {
-        name: t("menu.blogs"),
+        name: t("blog"),
         route: "/blogs",
       },
     ];

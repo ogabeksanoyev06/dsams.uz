@@ -54,7 +54,6 @@
   const { requiredIf, email, minLength } = useTranslate();
 
   const { showToast } = useCustomToast();
-  const localePath = useLocalePath();
   const router = useRouter();
 
   const accessToken = useCookie("user_token");

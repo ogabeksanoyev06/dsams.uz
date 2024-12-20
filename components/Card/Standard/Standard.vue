@@ -4,7 +4,7 @@
       <div class="h-[176px] flex-shrink-0">
         <UiImage :src="item?.photo_url" :alt="item?.name" class="size-full rounded-lg object-cover shadow" />
       </div>
-      <NuxtLink :to="localePath(`/standards/${item?._id}`)">
+      <NuxtLink :to="`/standards/${item?._id}`">
         <UiButton class="h-9">
           Ko‘rish
           <Icon class="size-4" name="lucide:arrow-right" />
@@ -20,7 +20,7 @@
         <div class="line-clamp-4 text-sm font-medium" v-html="item.short_description" />
       </div>
       <div class="line-clamp-2 text-xs text-muted-foreground" v-html="item.description" />
-      <NuxtLink :to="localePath(`/standards/${item?._id}`)" class="lg:hidden">
+      <NuxtLink :to="`/standards/${item?._id}`" class="lg:hidden">
         <UiButton class="h-9">
           Ko‘rish
           <Icon class="size-4" name="lucide:arrow-right" />
@@ -39,5 +39,4 @@
       type: Object,
     },
   });
-  const localePath = useLocalePath();
 </script>

@@ -21,7 +21,7 @@
       </section>
       <section class="mt-10 sm:mt-16">
         <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <NuxtLink :to="localePath(`/standards/${item._id}`)" v-for="(item, key) in standards.data" :key>
+          <NuxtLink :to="`/standards/${item._id}`" v-for="(item, key) in standards.data" :key>
             <div class="transition-300 flex flex-col gap-3 rounded-xl border bg-background p-4">
               <h2 class="leading-140 text-xl font-bold text-primary">{{ item?.name }}</h2>
               <div class="line-clamp-4 text-sm" v-html="item.short_description" />
@@ -35,12 +35,12 @@
 
 <script setup>
   import { useStandardsStore } from "@/stores/standards.js";
+  import { useI18n } from "vue-i18n";
 
   const standardStore = useStandardsStore();
 
   const { getStandardById, getStandards } = standardStore;
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const route = useRoute();

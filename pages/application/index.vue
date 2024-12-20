@@ -226,9 +226,10 @@
   import { useSektorStore } from "@/stores/sektors.js";
   import { useStandardsStore } from "@/stores/standards.js";
   import { useTranslate } from "~/utils/i18n-validators";
+  import { useI18n } from 'vue-i18n'
 
   definePageMeta({
-    middleware: ["auth"],
+    middleware: ["authUser"],
   });
 
   const { showToast } = useCustomToast();

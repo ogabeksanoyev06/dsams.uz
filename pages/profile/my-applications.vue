@@ -35,6 +35,7 @@
 
 <script setup>
   import { useApplicationStore } from "@/stores/application.js";
+  import { useI18n } from 'vue-i18n'
 
   definePageMeta({
     layout: "profile",
@@ -44,7 +45,6 @@
 
   const { getAllApplications } = applicationStore;
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const getStatusClass = (status) => {

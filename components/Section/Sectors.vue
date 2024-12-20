@@ -2,9 +2,9 @@
   <div class="bg-muted/35 py-10">
     <div class="container">
       <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-10">
-        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">Sektorlar</h2>
+        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ t("sectors") }}</h2>
         <NuxtLink to="/sectors">
-          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">Barcha sektorlar</UiButton>
+          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">{{ t("allSectors") }}</UiButton>
         </NuxtLink>
       </div>
       <transition name="fade" mode="out-in">
@@ -23,13 +23,14 @@
 
 <script setup>
   import { useSektorStore } from "@/stores/sektors.js";
+  import { useI18n } from "vue-i18n";
 
   const sektorStore = useSektorStore();
 
   const { getSektors } = sektorStore;
   const sectors = ref([]);
 
-  const { locale } = useI18n();
+  const { locale, t } = useI18n();
   const loading = ref(true);
 
   onMounted(async () => {

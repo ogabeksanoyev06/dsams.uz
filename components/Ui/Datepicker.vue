@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <VDatePicker :locale="locale" :trim-weeks="props.trimWeeks || true" :is-dark="$colorMode.value == 'dark'" v-bind="$attrs">
+    <VDatePicker :trim-weeks="props.trimWeeks || true" :is-dark="$colorMode.value == 'dark'" v-bind="$attrs">
       <template v-for="(_, slot) in $slots" #[slot]="scope">
         <slot :name="slot" v-bind="scope" />
       </template>
@@ -10,64 +10,9 @@
 
 <script lang="ts" setup>
   import { computed } from "vue";
-  import { useI18n } from "vue-i18n";
   import type { Calendar, DatePicker } from "v-calendar";
 
   defineOptions({ inheritAttrs: false });
-
-  const locales = {
-    en: {
-      id: "en",
-      firstDayOfWeek: 7,
-      masks: {
-        title: "MMMM YYYY",
-        weekdays: "WWW",
-        navMonths: "MMM",
-        input: "YYYY-MM-DD",
-      },
-      dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-      dayNamesShorter: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-      dayNamesNarrow: ["S", "M", "T", "W", "T", "F", "S"],
-      monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-      monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    },
-    uz: {
-      id: "uz",
-      firstDayOfWeek: 7,
-      masks: {
-        title: "MMMM YYYY",
-        weekdays: "WWW",
-        navMonths: "MMM",
-        input: "YYYY-MM-DD",
-      },
-      dayNames: ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"],
-      dayNamesShort: ["Yak", "Du", "Se", "Cho", "Pa", "Ju", "Sha"],
-      dayNamesShorter: ["Y", "D", "S", "C", "P", "J", "S"],
-      dayNamesNarrow: ["Y", "D", "S", "C", "P", "J", "S"],
-      monthNames: ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", "Sentabr", "Oktabr", "Noyabr", "Dekabr"],
-      monthNamesShort: ["Yan", "Fev", "Mar", "Apr", "May", "Iyun", "Iyul", "Avg", "Sen", "Okt", "Noy", "Dek"],
-    },
-    ru: {
-      id: "ru",
-      firstDayOfWeek: 1,
-      masks: {
-        title: "MMMM YYYY",
-        weekdays: "WWW",
-        navMonths: "MMM",
-        input: "YYYY-MM-DD",
-      },
-      dayNames: ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"],
-      dayNamesShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
-      dayNamesShorter: ["В", "П", "В", "С", "Ч", "П", "С"],
-      dayNamesNarrow: ["В", "П", "В", "С", "Ч", "П", "С"],
-      monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-      monthNamesShort: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн", "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек"],
-    },
-  };
-
-  const { locale: currentLocale } = useI18n();
-  const locale = computed(() => locales[currentLocale.value] || locales.en);
 
   // @ts-expect-error - This is a hacky way to get the props from the Calendar and DatePicker components
   interface Props extends /* @vue-ignore */ Partial<InstanceType<typeof Calendar>["$props"]>, /* @vue-ignore */ Omit<Partial<InstanceType<typeof DatePicker>["$props"]>, "attributes"> {}

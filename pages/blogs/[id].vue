@@ -16,6 +16,7 @@
 
 <script setup>
   import { useBlogsStore } from "@/stores/blogs.js";
+  import { useI18n } from "vue-i18n";
 
   const blogStore = useBlogsStore();
 

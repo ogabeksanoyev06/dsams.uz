@@ -2,17 +2,15 @@
   <div class="py-10">
     <div class="container">
       <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-6">
-        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">Standartlar</h2>
-        <NuxtLink>
-          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">Barcha standartlar</UiButton>
+        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ t("standards") }}</h2>
+        <NuxtLink to="/standards">
+          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">{{ t("allStandards") }}</UiButton>
         </NuxtLink>
       </div>
       <div class="mb-6 rounded-xl bg-background p-4">
-        <h3 class="mb-2 text-lg font-semibold md:text-xl xl:text-2xl">ISO: Xalqaro standartlashtirish tashkiloti</h3>
+        <h3 class="mb-2 text-lg font-semibold md:text-xl xl:text-2xl">{{ t("title1") }}</h3>
         <p class="sm:text-base">
-          Xalqaro standartlar siz har kuni foydalanadigan mahsulot va xizmatlar xavfsiz , ishonchli va yuqori sifatli bo'lishini ta'minlaydi . Ular, shuningdek, korxonalarga barqaror va axloqiy amaliyotlarni qabul qilishda yo'l-yo'riq ko'rsatadi va
-          sizning xaridlaringiz nafaqat a'lo darajada bajariladigan, balki sayyoramizni himoya qiladigan kelajakni yaratishga yordam beradi. Aslini olganda, standartlar sifatni vijdon bilan uyg'unlashtirib, kundalik tajribangizni va tanlovingizni
-          yaxshilaydi.
+          {{ t("description2") }}
         </p>
       </div>
       <transition name="fade" mode="out-in">
@@ -31,13 +29,14 @@
 
 <script setup>
   import { useStandardsStore } from "@/stores/standards.js";
+  import { useI18n } from "vue-i18n";
 
   const standardStore = useStandardsStore();
 
   const { getStandards } = standardStore;
   const { standards } = storeToRefs(standardStore);
 
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
   const loading = ref(true);
 
   onMounted(async () => {

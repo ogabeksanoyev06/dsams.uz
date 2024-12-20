@@ -13,7 +13,7 @@ export const useSektorStore = defineStore("sektors", () => {
       const response = await api.get("users/sektors", { params });
       sectors.value = response.data.data;
       return response.data;
-    } catch {
+    } catch (error) {
       throw error;
     }
   };
@@ -22,7 +22,7 @@ export const useSektorStore = defineStore("sektors", () => {
     try {
       const response = await api.get("sektors/search", { params });
       return response.data;
-    } catch {
+    } catch (error) {
       throw error;
     } finally {
     }
@@ -45,7 +45,7 @@ export const useSektorStore = defineStore("sektors", () => {
     try {
       const response = await api.get("users/sections", { params });
       return response.data;
-    } catch {
+    } catch (error) {
       throw error;
     }
   };
@@ -55,7 +55,7 @@ export const useSektorStore = defineStore("sektors", () => {
       const response = await api.get(`users/sections/${id}`, { params });
 
       return response.data;
-    } catch {
+    } catch (error) {
       throw error;
     }
   };

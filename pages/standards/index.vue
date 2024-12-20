@@ -22,7 +22,7 @@
           <div class="group flex flex-col overflow-hidden rounded-xl border bg-background" v-for="(item, key) in standards.data" :key>
             <div class="flex-1 p-4">
               <p class="mb-2">Standart</p>
-              <NuxtLink :to="localePath(`/standards/${item?._id}`)" class="leading-130 text-xl font-medium text-primary hover:underline">{{ item.name }}</NuxtLink>
+              <NuxtLink :to="`/standards/${item?._id}`" class="leading-130 text-xl font-medium text-primary hover:underline">{{ item.name }}</NuxtLink>
               <!-- <h5 class="leading-130 text-xl font-medium">Axborot texnologiyalari</h5> -->
               <h6 class="leading-130 mt-1 line-clamp-3 text-base font-medium" v-html="item.short_description"></h6>
               <p class="leading-130 mt-2 line-clamp-3 text-sm font-normal text-muted-foreground" v-html="item.description" />
@@ -37,12 +37,12 @@
 
 <script setup>
   import { useStandardsStore } from "@/stores/standards.js";
+  import { useI18n } from "vue-i18n";
 
   const standardStore = useStandardsStore();
 
   const { getStandards } = standardStore;
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const search = ref("");

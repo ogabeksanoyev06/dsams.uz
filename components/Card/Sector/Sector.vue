@@ -3,7 +3,7 @@
     <div v-if="letter" class="preloader-image flex-center h-8 w-8 flex-shrink-0 rounded-full border-2 max-sm:hidden">
       <span class="text-sm font-semibold">{{ letter }}</span>
     </div>
-    <h3 class="!leading-130 my-auto w-full text-sm font-medium max-md:text-center md:line-clamp-2 md:text-sm">
+    <h3 class="!leading-130 my-auto w-full text-sm font-medium lowercase max-md:text-center md:line-clamp-2 md:text-sm">
       {{ formattedName }}
     </h3>
   </NuxtLink>
@@ -17,7 +17,8 @@
   });
 
   const extractLetterAndName = (name) => {
-    const regex = /^([A-Z])\)\s(.+)/;
+    const regex = /^([A-ZА-Я])\)\s(.+)/;
+
     const match = name?.match(regex);
 
     if (match) {

@@ -21,7 +21,7 @@
           <UiTableCell>{{ item.company.website }}</UiTableCell>
           <UiTableCell>{{ $dayjs(item.company.date).format("DD.MM.YYYY HH:mm") }}</UiTableCell>
           <UiTableCell>
-            <NuxtLink :to="localePath(`/profile/assessments/${item._id}`)" class="text-blue-800"> Baholash </NuxtLink>
+            <NuxtLink :to="`/profile/assessments/${item._id}`" class="text-blue-800"> Baholash </NuxtLink>
           </UiTableCell>
         </UiTableRow>
       </UiTableBody>
@@ -31,6 +31,7 @@
 
 <script setup>
   import { useApplicationStore } from "@/stores/application.js";
+  import { useI18n } from "vue-i18n";
 
   definePageMeta({
     layout: "profile",
@@ -40,7 +41,6 @@
 
   const { getApplicationsUseAFilter } = applicationStore;
 
-  const localePath = useLocalePath();
   const { locale } = useI18n();
 
   const { data } = await useAsyncData("assessments", async () => {

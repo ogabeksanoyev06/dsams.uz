@@ -8,19 +8,7 @@ export default defineNuxtConfig({
   },
 
   css: ["@/assets/css/tailwind.css"],
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@vueuse/nuxt", "@nuxt/icon", "@nuxt/fonts", "@samk-dev/nuxt-vcalendar", "@pinia/nuxt", "@nuxtjs/i18n", "nuxt-swiper", "dayjs-nuxt"],
-
-  i18n: {
-    defaultLocale: "uz",
-    lazy: true,
-    langDir: "locales",
-    locales: [
-      { code: "en", file: "en.json" },
-      { code: "uz", file: "uz.json" },
-      { code: "ru", file: "ru.json" },
-    ],
-    vueI18n: "./i18n.config.ts",
-  },
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@vueuse/nuxt", "@nuxt/icon", "@nuxt/fonts", "@samk-dev/nuxt-vcalendar", "@pinia/nuxt", "nuxt-swiper", "dayjs-nuxt"],
 
   tailwindcss: {
     exposeConfig: true,
@@ -57,7 +45,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL || "https://dsams-back.onrender.com/api/",
+      apiBaseUrl: process.env.API_BASE_URL || "https://api.dsams.uz/api/",
     },
   },
 
