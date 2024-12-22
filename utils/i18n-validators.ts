@@ -4,7 +4,6 @@ import { useI18n } from "vue-i18n";
 export const useTranslate = () => {
   const { createI18nMessage } = validators;
 
-  // Create your i18n message instance. Used for vue-i18n@9
   const withI18nMessage = createI18nMessage({
     t: useI18n().t,
     messagePath: ({ $validator }) => `messages.${$validator}`,
@@ -31,7 +30,6 @@ export const useTranslate = () => {
 
   const validatePhoneNumber = (value: string) => {
     const regex = /^(90|91|93|94|95|98|99|33|97|71|77|78|70|20)([- ])?(\d{3})([- ])?(\d{2})([- ])?(\d{2})$/;
-
     return regex.test(value);
   };
 

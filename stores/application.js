@@ -8,6 +8,22 @@ export const useApplicationStore = defineStore("application", () => {
   const loadingStandard = ref(false);
   const questionsWithAnswers = ref([]);
 
+  const uploadFile = async (form) => {
+    loading.value = true;
+    try {
+      const response = await api.post("https://cdn.dsams.uz/api/upload", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   const createApplication = async (form) => {
     loading.value = true;
     try {
@@ -49,13 +65,11 @@ export const useApplicationStore = defineStore("application", () => {
 
   const getApplicationById = async (id) => {
     try {
-      loadingStandard.value = true;
       const response = await api.get(`experts/applications/${id}`);
       return response.data;
     } catch (error) {
       throw error;
     } finally {
-      loadingStandard.value = false;
     }
   };
 
@@ -80,5 +94,7 @@ export const useApplicationStore = defineStore("application", () => {
     rateApplication,
     questionsWithAnswers,
     loading,
+    loadingStandard,
+    uploadFile,
   };
 });

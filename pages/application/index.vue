@@ -94,7 +94,6 @@
             <h3 class="mb-4 text-lg font-semibold sm:max-w-[80%]">Tashkilotning tekshirishga tayyor bo'lish muddati. Dastlabki baholashni o'tkazish uchun taklif qilingan muddat (agar kerak bo'lsa)</h3>
             <div class="mb-6 grid gap-4 md:grid-cols-12">
               <div class="grid gap-1.5 md:col-span-6">
-                {{ new Date(values.company.term).getTime() }}
                 <UiLabel for="company-date">Baholashni o'tkazish uchun taklif qilingan muddat</UiLabel>
                 <UiDatepicker v-model="values.company.term" :error="$v.company.term?.$error">
                   <template #default="{ togglePopover }">
@@ -114,11 +113,11 @@
             <div class="mb-6 grid gap-4 md:grid-cols-12">
               <div class="grid gap-1.5 md:col-span-4">
                 <UiLabel for="company-services">Sektorlar</UiLabel>
-                <UiSelect v-model="values.sektor">
+                <UiSelect v-model="values.sektor" @update:model-value="selectedSektor">
                   <UiSelectTrigger placeholder="Tanlang" :error="$v.sektor?.$error" />
                   <UiSelectContent>
                     <UiSelectGroup>
-                      <UiSelectItem v-for="sector in data.sectors.data" :key="sector._id" :value="sector._id" :text="sector.name_uz" />
+                      <UiSelectItem v-for="sector in data.sectors.data" :key="sector._id" :value="sector._id" :text="sector.name" />
                     </UiSelectGroup>
                   </UiSelectContent>
                 </UiSelect>
@@ -139,7 +138,7 @@
               </div>
               <div class="grid gap-1.5 md:col-span-4">
                 <UiLabel for="company-services">Standardlar</UiLabel>
-                <UiSelect v-model="values.standart">
+                <UiSelect v-model="values.standart" :disabled="!values.sections || loadingStandardById" @update:model-value="selectedStandard">
                   <UiSelectTrigger placeholder="Tanlang" :error="$v.standart?.$error" />
                   <UiSelectContent>
                     <UiSelectGroup>
@@ -202,7 +201,7 @@
                         <UiTableCell> {{ exp.position }}</UiTableCell>
                         <UiTableCell>
                           {{ exp.birth_date }}
-                        </UiTableCell>
+                        </UiTableCell>  
                       </UiTableRow>
                     </UiTableBody>
                   </UiTable>
@@ -226,10 +225,10 @@
   import { useSektorStore } from "@/stores/sektors.js";
   import { useStandardsStore } from "@/stores/standards.js";
   import { useTranslate } from "~/utils/i18n-validators";
-  import { useI18n } from 'vue-i18n'
+  import { useI18n } from "vue-i18n";
 
   definePageMeta({
-    middleware: ["authUser"],
+    middleware: ["auth"],
   });
 
   const { showToast } = useCustomToast();
@@ -245,7 +244,7 @@
 
   const { loading } = storeToRefs(applicationStore);
   const { sections, loadingSection } = storeToRefs(sektorStore);
-  const { standard, loadingStandard } = storeToRefs(standardStore);
+  const { loadingStandardById } = storeToRefs(standardStore);
 
   const { requiredIf, validPhoneNumber, isNumber, email } = useTranslate();
 
@@ -265,13 +264,12 @@
     currentTab.value = value;
   };
 
-  const currentStep = ref(1);
+  const standard = ref();
+
+  const currentStep = ref(3);
   const totalSteps = 3;
 
-  const answers = ref([]);
   const isMaxSize = ref(false);
-
-  const errorMap = ref({});
 
   const { values, $v } = useForm(
     {
@@ -306,7 +304,7 @@
       sektor: null,
       standart: null,
       sections: null,
-      answers: answers.value,
+      answers: [],
     },
     {
       company: {
@@ -337,8 +335,6 @@
       answers: { required: requiredIf(() => currentStep.value === 2) },
     }
   );
-  const mode = ref("dateTime");
-
   const generalExportList = ref([]);
   const exportList = ref([]);
 
@@ -357,7 +353,6 @@
       generalExportList.value = [];
     }
   };
-  const dayjs = useDayjs();
   const updateExportList = (key, checked) => {
     if (currentTab.value == "main") {
       updateGeneralExport(key, checked);
@@ -374,11 +369,11 @@
 
   const handleUploader = (data) => {
     if (data.questionId) {
-      const existingAnswer = answers?.value.find((answer) => answer?.question_id === data.questionId);
+      const existingAnswer = values.answers?.find((answer) => answer?.question_id === data.questionId);
       if (existingAnswer) {
         existingAnswer.answer_url = data.file;
       } else {
-        answers.value.push({
+        values.answers.push({
           question_id: data?.questionId,
           answer_url: "url",
         });
@@ -428,7 +423,7 @@
           sektor: values.sektor,
           standart: values.standart,
           sections: [values.sections],
-          answers: answers.value,
+          answers: values.answers,
         });
         if (res.status) {
           showToast("Arizangiz muvaffaqiyatli yuborildi", "success");
@@ -445,27 +440,44 @@
   const progressWidth = computed(() => {
     return `${(currentStep.value / totalSteps) * 100}%`;
   });
+  const selectedSektor = async () => {
+    try {
+      await getSektorById(values.sektor, { lang: locale.value });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const selectedStandard = async () => {
+    try {
+      const res = await getStandardById(values.standart, { lang: locale.value });
+      const standardData = res.data;
+      standardData.questions = standardData.questions?.map((question) => ({
+        ...question,
+        file: null,
+      }));
+      standard.value = standardData;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const { data } = await useAsyncData("application", async () => {
-    const [exports, sectors, standards] = await Promise.all([getAllExports(), getSektors(), getStandards()]);
+    const [exports, sectors, standards] = await Promise.all([
+      getAllExports(),
+      getSektors({
+        lang: locale.value,
+        limit: 500,
+        page: 1,
+      }),
+      getStandards({
+        lang: locale.value,
+      }),
+    ]);
     return {
       exports,
       sectors,
       standards,
     };
   });
-
-  watch(
-    () => values.sektor,
-    () => {
-      getSektorById(values.sektor, { lang: locale.value });
-    }
-  );
-
-  watch(
-    () => values.standart,
-    () => {
-      getStandardById(values.standart, { lang: locale.value });
-    }
-  );
 </script>

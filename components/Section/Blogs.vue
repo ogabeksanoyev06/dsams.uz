@@ -2,9 +2,9 @@
   <div class="overflow-hidden py-10">
     <div class="container">
       <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-10">
-        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ t("blog") }}</h2>
-        <NuxtLink to="/blogs">
-          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary"> {{ t("allBlogs") }} </UiButton>
+        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ $t("blog") }}</h2>
+        <NuxtLink :to="localePath('/blogs')">
+          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary"> {{ $t("allBlogs") }} </UiButton>
         </NuxtLink>
       </div>
       <Transition name="fade" mode="out-in">
@@ -67,7 +67,8 @@
 
 <script setup>
   import { useBlogsStore } from "@/stores/blogs.js";
-  import { useI18n } from "vue-i18n";
+
+  const localePath = useLocalePath();
 
   const blogStore = useBlogsStore();
 
@@ -87,7 +88,7 @@
     isEnd.value = swiper.isEnd;
   };
 
-  const { locale, t } = useI18n();
+  const { locale } = useI18n();
   const loading = ref(true);
 
   onMounted(async () => {

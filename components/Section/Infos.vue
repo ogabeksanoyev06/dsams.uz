@@ -1,8 +1,8 @@
 <template>
   <div class="bg-muted/35 py-10">
     <div class="container">
-      <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ t("title2") }}</h2>
-      <p class="mt-6 rounded-xl bg-background p-4 sm:text-base">{{ t("description1") }}</p>
+      <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ $t("title2") }}</h2>
+      <p class="mt-6 rounded-xl bg-background p-4 sm:text-base">{{ $t("description1") }}</p>
       <!-- <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div class="flex flex-col items-start rounded-xl bg-background p-4">
           <h3 class="text-lg font-semibold md:text-xl xl:text-2xl">Standart nima?</h3>
@@ -26,7 +26,5 @@
 </template>
 
 <script setup>
-  import { useI18n } from "vue-i18n";
 
-  const { t } = useI18n();
 </script>

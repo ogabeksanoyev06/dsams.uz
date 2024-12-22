@@ -22,7 +22,7 @@
           <div class="break-inside-avoid" v-for="(sector, key) in sectors.data" :key>
             <div class="transition-300 group flex h-max flex-col items-start justify-start gap-3 overflow-hidden rounded-xl max-sm:my-4 md:gap-4 md:border-b md:border-border md:bg-background md:pt-4">
               <div class="mx-4 flex w-11/12 cursor-pointer items-center justify-center gap-2 max-sm:mx-0 max-sm:w-full max-sm:justify-start md:flex-col md:items-start">
-                <NuxtLink :to="`/sectors/${sector?._id}`" class="flex-center-between group/title gap-1.5 hover:!text-primary max-sm:justify-start">
+                <NuxtLink :to="localePath(`/sectors/${sector?._id}`)" class="flex-center-between group/title gap-1.5 hover:!text-primary max-sm:justify-start">
                   <span class="transition-300 cursor-pointer self-stretch text-sm font-medium leading-6 group-hover/title:text-primary">{{ sector.name }}</span>
                   <Icon name="i-lucide:chevron-right" class="transition-300 size-5 -translate-x-1 text-muted-foreground opacity-0 group-hover/title:translate-x-0 group-hover/title:text-primary group-hover/title:opacity-100 max-sm:hidden" />
                 </NuxtLink>
@@ -48,7 +48,8 @@
 
 <script setup>
   import { useSektorStore } from "@/stores/sektors.js";
-  import { useI18n } from "vue-i18n";
+
+  const localePath = useLocalePath();
 
   const sektorStore = useSektorStore();
 

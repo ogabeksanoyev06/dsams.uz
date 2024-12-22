@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <NuxtLink to="/profile">
+        <NuxtLink :to="localePath('/profile')">
           <UiDropdownMenuItem class="cursor-pointer">
             <Icon class="h-[18px] w-[18px]" name="lucide:user" />
             <span>Profil</span>
@@ -49,6 +49,8 @@
   import { useProfileStore } from "@/stores/profile.js";
 
   const authModal = useState("authModal", () => false);
+
+  const localePath = useLocalePath();
 
   const profileStore = useProfileStore();
   const authStore = useAuthStore();

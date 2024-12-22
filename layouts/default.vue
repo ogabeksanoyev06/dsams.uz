@@ -11,7 +11,6 @@
 <script setup>
   import { useCustomToast } from "@/composables/useCustomToast.js";
   import { useProfileStore } from "@/stores/profile";
-  import { useI18n } from "vue-i18n";
   import { useRouter } from "vue-router";
 
   const router = useRouter();

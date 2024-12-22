@@ -47,7 +47,6 @@
   import { useCustomToast } from "@/composables/useCustomToast.js";
   import { useApplicationStore } from "@/stores/application.js";
   import { useProfileStore } from "@/stores/profile.js";
-  import { useI18n } from "vue-i18n";
 
   definePageMeta({
     layout: "profile",

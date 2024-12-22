@@ -20,8 +20,7 @@
     base: "p-1",
     variants: {
       position: {
-        popper:
-          "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
+        popper: "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]",
         "item-aligned": "",
       },
     },

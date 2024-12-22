@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/sectors/${item?._id}`" class="transition-300 flex h-full cursor-pointer items-center gap-2 rounded-xl border-b border-gray-400 bg-background p-3 hover:shadow-card max-md:flex-col max-md:justify-center md:gap-3 md:p-4">
+  <NuxtLink :to="localePath(`/sectors/${item?._id}`)" class="transition-300 flex h-full cursor-pointer items-center gap-2 rounded-xl border-b border-gray-400 bg-background p-3 hover:shadow-card max-md:flex-col max-md:justify-center md:gap-3 md:p-4">
     <div v-if="letter" class="preloader-image flex-center h-8 w-8 flex-shrink-0 rounded-full border-2 max-sm:hidden">
       <span class="text-sm font-semibold">{{ letter }}</span>
     </div>
@@ -15,6 +15,8 @@
       type: Object,
     },
   });
+
+  const localePath = useLocalePath();
 
   const extractLetterAndName = (name) => {
     const regex = /^([A-ZА-Я])\)\s(.+)/;

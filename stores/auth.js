@@ -68,7 +68,7 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   const logout = async () => {
-    showToast("Tizimdan chiqdingiz", "success");
+    // showToast("Tizimdan chiqdingiz", "success");
     accessToken.value = null;
     await router.push("/");
   };

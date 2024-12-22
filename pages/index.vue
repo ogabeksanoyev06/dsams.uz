@@ -12,9 +12,6 @@
   import { useBlogsStore } from "@/stores/blogs.js";
   import { useSektorStore } from "@/stores/sektors.js";
   import { useStandardsStore } from "@/stores/standards.js";
-  import { useI18n } from "vue-i18n";
-
-  const { locale } = useI18n();
 
   const blogStore = useBlogsStore();
   const sektorStore = useSektorStore();

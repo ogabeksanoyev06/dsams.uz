@@ -6,6 +6,7 @@ export const useStandardsStore = defineStore("standards", () => {
 
   const standards = ref([]);
   const standard = ref([]);
+  const loadingStandardById = ref(false);
 
   const getStandards = async (params) => {
     try {
@@ -19,11 +20,14 @@ export const useStandardsStore = defineStore("standards", () => {
 
   const getStandardById = async (id, params) => {
     try {
+      loadingStandardById.value = true;
       const response = await api.get(`users/standarts/${id}`, { params });
       standard.value = response.data.data;
       return response.data;
     } catch (error) {
       throw error;
+    } finally {
+      loadingStandardById.value = false;
     }
   };
 
@@ -32,5 +36,5 @@ export const useStandardsStore = defineStore("standards", () => {
     return response.data;
   };
 
-  return { getStandards, getStandardById, searchStandards, standards, standard };
+  return { getStandards, getStandardById, searchStandards, standards, standard, loadingStandardById };
 });

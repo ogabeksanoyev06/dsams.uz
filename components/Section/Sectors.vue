@@ -1,10 +1,12 @@
 <template>
   <div class="bg-muted/35 py-10">
     <div class="container">
+      {{ file }}
+      <UiFileInput v-model="file" @update:modelValue="handleUpload" />
       <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-10">
-        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ t("sectors") }}</h2>
-        <NuxtLink to="/sectors">
-          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">{{ t("allSectors") }}</UiButton>
+        <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ $t("sectors") }}</h2>
+        <NuxtLink :to="localePath('/sectors')">
+          <UiButton variant="expandIcon" icon-placement="right" icon="lucide:arrow-right" class="transition-300 h-auto !bg-transparent !p-0 text-foreground hover:text-primary">{{ $t("allSectors") }}</UiButton>
         </NuxtLink>
       </div>
       <transition name="fade" mode="out-in">
@@ -22,16 +24,32 @@
 </template>
 
 <script setup>
+  import { useApplicationStore } from "@/stores/application.js";
   import { useSektorStore } from "@/stores/sektors.js";
-  import { useI18n } from "vue-i18n";
+
+  const file = ref(null);
+
+  const applicationStore = useApplicationStore();
+  const { uploadFile } = applicationStore;
 
   const sektorStore = useSektorStore();
+  const localePath = useLocalePath();
 
   const { getSektors } = sektorStore;
   const sectors = ref([]);
 
-  const { locale, t } = useI18n();
+  const { locale } = useI18n();
   const loading = ref(true);
+
+  const handleUpload = async () => {
+    try {
+      const data = new FormData();
+      data.append("file", file.value);
+      await uploadFile(data);
+    } catch (error) {
+      console.error("Faylni yuklashda xatolik:", error);
+    }
+  };
 
   onMounted(async () => {
     try {

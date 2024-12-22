@@ -1,7 +1,5 @@
-import { useI18n } from "vue-i18n";
-
 export const useLanguageSwitcher = () => {
-  const { locale } = useI18n();
+  const { locale, setLocale } = useI18n();
 
   const languagesList = [
     {
@@ -24,9 +22,8 @@ export const useLanguageSwitcher = () => {
   const currentLanguage = computed(() => languagesList.find((lang) => lang.code === locale.value));
 
   function changeLocale(_locale) {
-    useCookie("locale").value = _locale;
+    setLocale(_locale);
     locale.value = _locale;
-    window.location.reload();
   }
 
   return { currentLanguage, languagesList, changeLocale };
