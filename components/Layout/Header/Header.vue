@@ -28,7 +28,7 @@
         </NuxtLink>
         <LayoutHeaderLanguageSwitcher />
         <LayoutHeaderAuthorization />
-        <!-- <LayoutHeaderDarkModeToggle /> -->
+        <LayoutHeaderDarkModeToggle />
       </div>
     </div>
 
