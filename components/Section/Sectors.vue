@@ -39,15 +39,15 @@
   const { locale } = useI18n();
   const loading = ref(true);
 
-  const handleUpload = async () => {
-    try {
-      const data = new FormData();
-      data.append("file", file.value);
-      await uploadFile(data);
-    } catch (error) {
-      console.error("Faylni yuklashda xatolik:", error);
-    }
-  };
+  // const handleUpload = async () => {
+  //   try {
+  //     const data = new FormData();
+  //     data.append("file", file.value);
+  //     await uploadFile(data);
+  //   } catch (error) {
+  //     console.error("Faylni yuklashda xatolik:", error);
+  //   }
+  // };
 
   onMounted(async () => {
     try {
