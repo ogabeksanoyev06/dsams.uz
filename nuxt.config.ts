@@ -32,7 +32,6 @@ export default defineNuxtConfig({
     exposeConfig: true,
     editorSupport: true,
   },
-
   colorMode: {
     classSuffix: "",
     preference: "system",

@@ -20,7 +20,9 @@ export const useBlogsStore = defineStore("blogs", () => {
     try {
       const response = await api.get(`users/blogs/${id}`, { params });
       return response.data;
-    } catch (error) {}
+    } catch (error) {
+      
+    }
   };
 
   return { getBlogs, getBlogById, blogs };
