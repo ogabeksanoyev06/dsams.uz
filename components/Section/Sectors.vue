@@ -1,8 +1,6 @@
 <template>
   <div class="bg-muted/35 py-10">
     <div class="container">
-      {{ file }}
-      <UiFileInput v-model="file" @update:modelValue="handleUpload" />
       <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-10">
         <h2 class="text-xl font-bold tracking-tight md:text-2xl xl:text-3xl">{{ $t("sectors") }}</h2>
         <NuxtLink :to="localePath('/sectors')">
