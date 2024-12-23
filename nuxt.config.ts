@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   },
 
   css: ["@/assets/css/tailwind.css"],
-  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", , "@samk-dev/nuxt-vcalendar", "@pinia/nuxt", "nuxt-swiper", "dayjs-nuxt", "@nuxtjs/i18n"],
+  modules: ["@nuxtjs/tailwindcss", "@vueuse/nuxt", "@pinia/nuxt", "nuxt-swiper", "dayjs-nuxt", "@nuxtjs/i18n"],
 
   i18n: {
     types: "composition",
