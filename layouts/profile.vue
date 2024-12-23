@@ -66,16 +66,21 @@
       role: ["user"],
     },
   ];
+
   const filteredMenuItems = computed(() => sidebarNavItems.filter((item) => item.role.includes(roleCookie.value)));
 
   const { data: profileData } = await useAsyncData("layout", async () => {
-    if (accessToken.value && roleCookie.value) {
+    if (!accessToken.value || !roleCookie.value) {
+      return null;
+    }
+    try {
       if (roleCookie.value === "user") {
         return await getProfileUser();
       } else if (roleCookie.value === "export") {
         return await getProfileExport();
       }
+    } catch (error) {
+      return null;
     }
-    return null;
   });
 </script>
