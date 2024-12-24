@@ -11,5 +11,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (!accessToken.value || !roleCookie.value) {
     authModal.value = true;
     showToast("Avtorizatsiya talab qilinadi", "error");
+
+    return abortNavigation();
   }
 });

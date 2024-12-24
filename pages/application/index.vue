@@ -124,7 +124,7 @@
               </div>
 
               <div class="grid gap-1.5 md:col-span-4">
-                <UiLabel for="company-services">Bo'limlar</UiLabel>
+                <UiLabel for="sections">Bo'limlar</UiLabel>
                 <UiSelect v-model="values.sections" :disabled="!values.sektor || loadingSection">
                   <UiSelectTrigger :error="$v.sections?.$error">
                     <Icon v-if="loadingSection" name="lucide:loader" class="h-4 w-4 shrink-0 animate-spin text-muted-foreground opacity-70" />
@@ -142,7 +142,7 @@
                   <UiSelectTrigger placeholder="Tanlang" :error="$v.standart?.$error" />
                   <UiSelectContent>
                     <UiSelectGroup>
-                      <UiSelectItem v-for="standard in data.standards.data" :key="standard._id" :value="standard._id" :text="standard.name" />
+                      <UiSelectItem v-for="item in data.standards?.data" :key="item._id" :value="item._id" :text="item?.name" />
                     </UiSelectGroup>
                   </UiSelectContent>
                 </UiSelect>
@@ -150,13 +150,13 @@
               <div class="md:col-span-12">
                 <h3 class="mb-4 text-lg font-semibold">Savollar: {{ standard?.name }}</h3>
                 <ul class="grid gap-4">
-                  <li v-for="(question, key) in standard?.questions" :key="key">
+                  <li class="border-b border-dashed pb-4" v-for="(question, key) in standard?.questions" :key="key">
                     <h3 class="text-base font-semibold">{{ key + 1 }}. {{ question?.title }}</h3>
-                    <p class="mb-2 text-sm" v-html="question?.description" />
+                    <div class="mb-2 text-sm" v-html="question?.description" />
                     <div class="mt-2 flex sm:justify-end">
                       <div class="grid gap-1.5">
-                        <UiLabel :for="`file-${question._id}`">Fayl <span>Max: 10mb</span> </UiLabel>
-                        <UiFileInput :id="`file-${question._id}`" :questionId="question._id" :error="errorMap[question._id]" @error="handleError($event, question._id)" @update:modelValue="handleUploader" dashed />
+                        <UiLabel :for="`file-${question?._id}`">Fayl <span>Max: 10mb</span> </UiLabel>
+                        <UiFileInput :id="`file-${question?._id}`" :questionId="question?._id" @error="handleError($event, question?._id)" :error="isMaxSize && question?._id === currentQuestionId" @update:modelValue="handleUploader" dashed />
                       </div>
                     </div>
                   </li>
@@ -201,7 +201,7 @@
                         <UiTableCell> {{ exp.position }}</UiTableCell>
                         <UiTableCell>
                           {{ exp.birth_date }}
-                        </UiTableCell>  
+                        </UiTableCell>
                       </UiTableRow>
                     </UiTableBody>
                   </UiTable>
@@ -230,6 +230,8 @@
   definePageMeta({
     middleware: ["auth"],
   });
+
+  const localePath = useLocalePath();
 
   const { showToast } = useCustomToast();
   const { locale } = useI18n();
@@ -264,12 +266,13 @@
     currentTab.value = value;
   };
 
-  const standard = ref();
+  const standard = ref({});
 
   const currentStep = ref(1);
   const totalSteps = 3;
 
   const isMaxSize = ref(false);
+  const currentQuestionId = ref(null);
 
   const { values, $v } = useForm(
     {
@@ -301,9 +304,9 @@
           },
         ],
       },
-      sektor: null,
-      standart: null,
-      sections: null,
+      sektor: "",
+      standart: "",
+      sections: "",
       answers: [],
     },
     {
@@ -381,10 +384,11 @@
     }
   };
 
-  const handleError = (error, questionId) => {
+  const handleError = (isError, questionId) => {
     const questionExists = standard.value.questions?.some((q) => q._id === questionId);
     if (questionExists) {
-      errorMap.value[questionId] = error;
+      currentQuestionId.value = questionId;
+      isMaxSize.value = isError;
     }
   };
   const handleSubmitForm = async () => {
@@ -427,6 +431,7 @@
         });
         if (res.status) {
           showToast("Arizangiz muvaffaqiyatli yuborildi", "success");
+          navigateTo(localePath("/profile/my-applications"));
         }
       } catch (error) {
         showToast(error.response?.data?.message || "Xatolik yuz berdi", "error");
@@ -452,10 +457,14 @@
     try {
       const res = await getStandardById(values.standart, { lang: locale.value });
       const standardData = res.data;
-      standardData.questions = standardData.questions?.map((question) => ({
-        ...question,
-        file: null,
-      }));
+      console.log(standardData);
+      if (standardData.questions.length > 0) {
+        standardData.questions = standardData.questions.map((question) => ({
+          ...question,
+          file: null,
+        }));
+      }
+
       standard.value = standardData;
     } catch (error) {
       console.log(error);

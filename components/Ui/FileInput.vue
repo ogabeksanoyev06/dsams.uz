@@ -6,6 +6,7 @@
         '!border-destructive': error,
         '!border-dashed !border-destructive': dragging,
         '!border-dashed': dashed,
+        '!border-primary': media.file,
       }"
     >
       <!-- Fayl yuklangan holat -->
@@ -50,13 +51,14 @@
     modelValue: [Object, String, File],
     accept: {
       type: String,
-      default: "image/*, pdf/*, doc/*, docx/*, xls/*, xlsx/*, ppt/*, pptx/*, txt/*, csv/*",
+      default:
+        "image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,text/plain,text/csv",
     },
     error: Boolean,
-    questionId: String, // Agar mavjud bo'lsa, faylga bog'liq identifikatsiya qilish uchun ishlatiladi
+    questionId: String,
     maxSize: {
       type: Number,
-      default: 1024 * 1024 * 10, // Maksimal fayl hajmi (10MB)
+      default: 1024 * 1024 * 10, // 10 MB
     },
   });
 
