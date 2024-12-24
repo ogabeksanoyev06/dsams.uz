@@ -266,7 +266,7 @@
 
   const standard = ref();
 
-  const currentStep = ref(3);
+  const currentStep = ref(1);
   const totalSteps = 3;
 
   const isMaxSize = ref(false);
