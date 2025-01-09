@@ -36,5 +36,18 @@ export const useStandardsStore = defineStore("standards", () => {
     return response.data;
   };
 
-  return { getStandards, getStandardById, searchStandards, standards, standard, loadingStandardById };
+  const uploadFile = async (form) => {
+    try {
+      const response = await api.post("https://cdn.tuning-house.uz/api/images/upload", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  return { getStandards, getStandardById, searchStandards, standards, standard, loadingStandardById, uploadFile };
 });

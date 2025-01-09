@@ -14,14 +14,10 @@
         </p>
         <div class="flex flex-col items-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
           <nuxt-link to="/">
-            <UiButton class="h-[42px] min-w-[168px]">
-              {{ $t("go_to_home") }}
-            </UiButton>
+            <UiButton class="h-[42px] min-w-[168px]"> Bosh sahifa </UiButton>
           </nuxt-link>
           <nuxt-link to="/about-us">
-            <UiButton variant="secondary" class="border-gray-3 h-[42px] min-w-[168px] border">
-              {{ $t("about_us") }}
-            </UiButton>
+            <UiButton variant="secondary" class="border-gray-3 h-[42px] min-w-[168px] border"> Biz haqimizda </UiButton>
           </nuxt-link>
         </div>
       </div>

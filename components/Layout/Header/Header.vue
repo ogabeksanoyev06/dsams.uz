@@ -35,23 +35,26 @@
     <UiSheet v-model:open="open">
       <UiSheetContent side="left" class="p-0 py-4">
         <template #content>
-          <div class="flex flex-col gap-6 h-full">
-            <nav class=" grid gap-2 text-base bg-muted mx-1 p-2 rounded-lg">
+          <div class="flex h-full flex-col gap-6">
+            <nav class="mx-1 grid gap-2 rounded-lg p-2 text-base">
               <NuxtLink
                 :to="localePath(item.route)"
                 v-for="(item, key) in nav"
                 :key
-                class="rounded-lg  px-3 py-2 text-foreground transition-colors bg-white hover:text-foreground [&.router-link-exact-active]:bg-muted [&.router-link-exact-active]:text-foreground"
+                class="rounded-lg px-3 py-2 text-foreground transition-colors hover:text-foreground [&.router-link-exact-active]:bg-muted [&.router-link-exact-active]:text-foreground"
               >
                 {{ item.name }}
               </NuxtLink>
             </nav>
-            <NuxtLink :to="localePath('/application')" class="mx-1 mt-auto">
-              <UiButton variant="outline"  class="w-full">
-                <Icon class="size-4" name="lucide:mail-open" />
-                Ariza qoldirish
-              </UiButton>
-            </NuxtLink>
+            <div class="mx-1 mt-auto grid gap-2">
+              
+              <NuxtLink :to="localePath('/application')" class="">
+                <UiButton variant="outline" class="w-full">
+                  <Icon class="size-4" name="lucide:mail-open" />
+                  Ariza qoldirish
+                </UiButton>
+              </NuxtLink>
+            </div>
           </div>
         </template>
         <template #footer>
@@ -67,7 +70,7 @@
   import { useRoute } from "vue-router";
 
   const route = useRoute();
-
+  const colorMode = useColorMode();
   const open = ref(false);
   const localePath = useLocalePath();
 

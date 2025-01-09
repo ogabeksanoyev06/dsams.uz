@@ -242,7 +242,7 @@
 
   const { createApplication, getAllExports } = applicationStore;
   const { getSektors, getSektorById } = sektorStore;
-  const { getStandards, getStandardById } = standardStore;
+  const { getStandards, getStandardById, uploadFile } = standardStore;
 
   const { loading } = storeToRefs(applicationStore);
   const { sections, loadingSection } = storeToRefs(sektorStore);
@@ -252,11 +252,11 @@
 
   const tabList = [
     {
-      name: "Bosh exportlar",
+      name: "Bosh expertlar",
       value: "main",
     },
     {
-      name: "Exportlar",
+      name: "Expertlar",
       value: "secondary",
     },
   ];
@@ -370,18 +370,24 @@
     }
   };
 
-  const handleUploader = (data) => {
-    if (data.questionId) {
-      const existingAnswer = values.answers?.find((answer) => answer?.question_id === data.questionId);
-      if (existingAnswer) {
-        existingAnswer.answer_url = data.file;
-      } else {
-        values.answers.push({
-          question_id: data?.questionId,
-          answer_url: "url",
-        });
+  const handleUploader = async (data) => {
+    try {
+      const formData = new FormData();
+      formData.append("images", data.file);
+      const res = await uploadFile(formData);
+      if (res.status === "success" && data.questionId) {
+        showToast("Fayl muvaffaqiyatli yuklandi", "success");
+        const existingAnswer = values.answers?.find((answer) => answer?.question_id === data.questionId);
+        if (existingAnswer) {
+          existingAnswer.answer_url = data.file;
+        } else {
+          values.answers.push({
+            question_id: data?.questionId,
+            answer_url: res.data.fileUrl,
+          });
+        }
       }
-    }
+    } catch (error) {}
   };
 
   const handleError = (isError, questionId) => {
