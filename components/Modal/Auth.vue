@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full items-center justify-center">
     <UiDialog :open="modelValue" @update:open="emit('update:modelValue', $event)">
-      <UiDialogContent class="sm:max-w-[410px]" title="Avtorizatsiya" :description="step === 2 ? '' : 'SMS-dan tasdiqlash kodini kiriting. Tasdiqlash kodi emailga yuborildi'">
+      <UiDialogContent class="sm:max-w-[410px] w-full" title="Avtorizatsiya" :description="step === 2 ? '' : 'SMS-dan tasdiqlash kodini kiriting. Tasdiqlash kodi emailga yuborildi'">
         <template #content>
           <Transition name="fade" mode="out-in">
             <div v-if="step === 1" class="grid gap-4 py-4">
@@ -9,7 +9,7 @@
                 <UiLabel for="email" class="text-right"> Foydalanuvchi turi </UiLabel>
                 <UiSelect v-model="role">
                   <UiSelectTrigger placeholder="Select an option" />
-                  <UiSelectContent>
+                  <UiSelectContent class="!w-full">
                     <UiSelectGroup>
                       <UiSelectItem v-for="(role, i) in userRole" :key="i" :value="role.id" :text="role.name" />
                     </UiSelectGroup>
