@@ -23,7 +23,7 @@ export const getUserRole = (role) => {
   if (role === "user") {
     return "Oddiy foydalanuvchi";
   } else if (role === "export") {
-    return "Eksport";
+    return "Ekspert";
   } else {
     return "Noma'lum rol";
   }

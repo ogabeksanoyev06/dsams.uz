@@ -12,7 +12,7 @@
           <NuxtLink :to="localePath('/about')">
             <h2 class="mb-2 text-lg font-semibold lg:text-xl xl:text-2xl">Menejment tizimlarini baholashning raqamli tizimi</h2>
           </NuxtLink>
-          <p>Tools and trends change, but good design is timeless. Learn how to quickly develop an "eye" for design.</p>
+          <p>Menejment jarayonlarini avtomatlashtirish va samaradorlikni oshirish uchun innovatsion yechim. Tizimlaringizni raqamli asr talablariga mos ravishda rivojlantiring!</p>
         </div>
       </div>
     </div>

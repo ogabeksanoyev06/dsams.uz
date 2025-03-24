@@ -167,7 +167,7 @@
         </template>
         <template v-else>
           <div>
-            <h3 class="mb-4 text-lg font-semibold">Eksportlarni tanlang</h3>
+            <h3 class="mb-4 text-lg font-semibold">Ekspertlarni tanlang</h3>
             <UiTabs v-model="currentTab" @update:modelValue="changeTab" class="mb-6">
               <UiTabsList :pill="false" class="relative mb-6 grid max-w-[400px] grid-cols-2">
                 <UiTabsTrigger :pill="false" :value="tab.value" v-for="(tab, key) in tabList" :key>{{ tab.name }}</UiTabsTrigger>
