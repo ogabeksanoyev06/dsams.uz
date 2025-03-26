@@ -79,7 +79,7 @@
     },
     {
       id: "export",
-      name: "Export",
+      name: "Expert",
     },
   ];
 
